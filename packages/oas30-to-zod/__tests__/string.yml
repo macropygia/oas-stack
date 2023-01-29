@@ -1,0 +1,14 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: string
+paths:
+components:
+  schemas:
+    Minimum:
+      type: string
+      minLength: 1
+      maxLength: 10
+      pattern: '[a-z]+'
+      default: foo
+      description: bar

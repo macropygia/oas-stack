@@ -1,0 +1,11 @@
+packages/*/dist
+packages/*/docs
+packages/*/coverage
+packages/*/__tests__/src
+packages/*/__tests__/dist
+jest.config.cjs
+*.test.*
+!.*.js
+!.*.cjs
+!.*.mjs
+!.*.ts

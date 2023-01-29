@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: object
+paths:
+components:
+  schemas:
+    Basic:
+      type: object
+      properties:
+        Prop:
+          type: string
+    Required:
+      type: object
+      required:
+        - Prop1
+      properties:
+        Prop1:
+          type: string
+        Prop2:
+          type: string
+    WithAdd:
+      type: object
+      properties:
+        Prop:
+          type: string
+      additionalProperties: false
+    WithAddObj:
+      type: object
+      properties:
+        Prop:
+          type: string
+      additionalProperties:
+        type: string
+    OnlyProp:
+      properties:
+        Prop:
+          type: string
+    OnlyAddTrue:
+      additionalProperties: true
+    OnlyAddFalse:
+      additionalProperties: false
+    OnlyAddObje:
+      additionalProperties:
+        type: string
+    OnlyPropAndAdd:
+      properties:
+        Prop:
+          type: string
+      additionalProperties: true
+    Empty:
+      type: object
+      properties:

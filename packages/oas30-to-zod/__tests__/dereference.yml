@@ -1,0 +1,17 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: dereference
+paths:
+components:
+  schemas:
+    Comp1:
+      allOf:
+        - $ref: '#/components/schemas/Comp2'
+    Comp2:
+      type: object
+      properties:
+        Prop1:
+          type: string
+        Prop2:
+          type: number

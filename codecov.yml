@@ -1,0 +1,16 @@
+flag_management:
+  default_rules:
+    carryforward: true
+  individual_flags:
+    - name: oas30-to-zod
+      paths:
+        - packages/oas30-to-zod
+    # - name: oas31-to-zod
+    #   paths:
+    #     - packages/oas31-to-zod
+
+ignore:
+  - '**/coverage'
+  - '**/__tests__'
+  - '**/dist'
+  - '**/docs'

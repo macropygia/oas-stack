@@ -1,0 +1,69 @@
+{
+  "name": "oas30-to-zod",
+  "version": "0.0.0",
+  "description": "Generate Zod schemas from OpenAPI 3.0 Components Object",
+  "author": "macropygia",
+  "license": "MIT",
+  "homepage": "https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macropygia/oas-stack.git",
+    "directory": "packages/vite-plugin-pug-static"
+  },
+  "bugs": {
+    "url": "https://github.com/macropygia/oas-stack/issues"
+  },
+  "keywords": [
+    "openapi",
+    "zod"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "oas30-to-zod": "./dist/cli.js",
+    "oas30-to-zod-esm": "./dist/cli.mjs"
+  },
+  "scripts": {
+    "dev": "vitest",
+    "clean": "rimraf ./dist",
+    "type-check": "tsc --noEmit -p .",
+    "test": "vitest run",
+    "test:update": "vitest run -u",
+    "coverage": "vitest run --coverage",
+    "coverage:update": "vitest run --coverage -u",
+    "copy": "copyfiles -f src/default.ts.ejs ./dist",
+    "tsup": "tsup src/index.ts src/cli.ts --dts --shims --format cjs,esm",
+    "build": "pnpm clean && pnpm copy && pnpm tsup",
+    "tsc": "tsc -p tsconfig.build.json",
+    "build:tsc": "pnpm clean && pnpm copy && pnpm tsc",
+    "prepublishOnly": "pnpm type-check && pnpm coverage && pnpm build"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "ansis": "^1.5.5",
+    "cac": "^6.7.14",
+    "ejs": "^3.1.8",
+    "fs-extra": "^11.1.0",
+    "openapi-types": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/fs-extra": "^11.0.1",
+    "@types/prettier": "^2.7.2",
+    "zod": "^3.20.2"
+  },
+  "peerDependencies": {
+    "prettier": ">=2"
+  }
+}

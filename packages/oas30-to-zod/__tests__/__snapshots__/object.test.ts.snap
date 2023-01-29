@@ -1,0 +1,35 @@
+// Vitest Snapshot v1
+
+exports[`oasComponentsToZod (object) > Disable object autocomplete 1`] = `
+"const Basic = z.object({ Prop: z.string().optional() });
+const Required = z.object({ Prop1: z.string(), Prop2: z.string().optional() });
+const WithAdd = z.object({ Prop: z.string().optional() }).strict();
+const WithAddObj = z
+  .object({ Prop: z.string().optional() })
+  .catchall(z.string());
+const OnlyProp = z.undefined();
+const OnlyAddTrue = z.undefined();
+const OnlyAddFalse = z.undefined();
+const OnlyAddObje = z.undefined();
+const OnlyPropAndAdd = z.undefined();
+const Empty = z.object({});
+"
+`;
+
+exports[`oasComponentsToZod (object) > Enable object autocomplete 1`] = `
+"const Basic = z.object({ Prop: z.string().optional() });
+const Required = z.object({ Prop1: z.string(), Prop2: z.string().optional() });
+const WithAdd = z.object({ Prop: z.string().optional() }).strict();
+const WithAddObj = z
+  .object({ Prop: z.string().optional() })
+  .catchall(z.string());
+const OnlyProp = z.object({ Prop: z.string().optional() });
+const OnlyAddTrue = z.record(z.any());
+const OnlyAddFalse = z.object({}).strict();
+const OnlyAddObje = z.record(z.string());
+const OnlyPropAndAdd = z
+  .object({ Prop: z.string().optional() })
+  .catchall(z.any());
+const Empty = z.object({});
+"
+`;

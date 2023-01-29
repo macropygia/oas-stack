@@ -1,0 +1,48 @@
+<%#
+oas30-to-zod Default Template
+
+- The second argument of `oasComponentsToZod` is passed here (as expanded).
+- Complex processing is possible when combined with a user-specific parser.
+
+Available variables:
+
+[Data]
+parsedComponents: Record<ComponentName, string>
+printingOrder: ComponentName[]
+graph: {
+  deps: Record<ComponentName, ComponentName[]>
+  isObject: Record<ComponentName, boolean>
+}
+
+[Options]
+See README.md
+
+[Reserved for customization]
+data: Record<string, any>
+
+%><% if (eslintDisable) { -%>
+<% if (disableRules.length) { -%>
+/* eslint-disable <%- disableRules.join(', ') -%> */
+<% } else { -%>
+/* eslint-disable */
+<% } -%>
+<% } -%>
+<% if (!withoutImport) { -%>
+import { z } from 'zod';
+<% } -%>
+<% if (individually) { -%>
+<% printingOrder.forEach((componentName) => { %>
+export const <%= componentName %> = <%- parsedComponents[componentName] + ';' -%>
+<% }) %>
+<% } -%>
+<% if (!individually) { -%>
+<% printingOrder.forEach((componentName) => { %>
+const <%= componentName %> = <%- parsedComponents[componentName] + ';' -%>
+<% }); %>
+
+<% if (!withoutExport) { -%>
+export const <%= exportName %> = {
+  <%- printingOrder.join(',\n  ') %>
+};
+<% } -%>
+<% } -%>
