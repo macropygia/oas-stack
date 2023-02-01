@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/oas30-to-zod.svg?style=flat-square)](https://www.npmjs.com/package/oas30-to-zod)
 [![MIT](https://img.shields.io/npm/l/oas30-to-zod?style=flat-square)](./LICENSE)
-[![Codecov](https://img.shields.io/codecov/c/github/macropygia/oas-stack?token=8LNRV7E810&flag=oas30-to-zod&style=flat-square&logo=codecov)](https://codecov.io/gh/macropygia/oas-stack)
+[![Codecov](https://img.shields.io/codecov/c/github/macropygia/oas-stack?token=U3HD8ZUF98&style=flat-square&logo=codecov)](https://codecov.io/gh/macropygia/oas-stack)
 
 Generate Zod schemas from OpenAPI Specification 3.0 Components Object.
 

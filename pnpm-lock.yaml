@@ -67,7 +67,6 @@ importers:
       ejs: ^3.1.8
       fs-extra: ^11.1.0
       openapi-types: ^12.1.0
-      prettier: ^2.8.3
       zod: ^3.20.2
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
@@ -76,7 +75,6 @@ importers:
       ejs: 3.1.8
       fs-extra: 11.1.0
       openapi-types: 12.1.0
-      prettier: 2.8.3
     devDependencies:
       '@types/ejs': 3.1.1
       '@types/fs-extra': 11.0.1
@@ -3584,6 +3582,7 @@ packages:
     resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+    dev: true
 
   /pretty-format/27.5.1:
     resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}

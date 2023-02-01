@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/oas30-to-zod.svg?style=flat-square)](https://www.npmjs.com/package/oas30-to-zod)
 [![MIT](https://img.shields.io/npm/l/oas30-to-zod?style=flat-square)](./LICENSE)
-[![Codecov](https://img.shields.io/codecov/c/github/macropygia/oas-stack?token=8LNRV7E810&flag=oas30-to-zod&style=flat-square&logo=codecov)](https://codecov.io/gh/macropygia/oas-stack)
+[![Codecov](https://img.shields.io/codecov/c/github/macropygia/oas-stack?token=U3HD8ZUF98&style=flat-square&logo=codecov)](https://codecov.io/gh/macropygia/oas-stack)
 
 OpenAPI Specification 3.0のコンポーネントオブジェクトからZodスキーマを生成する。
 
@@ -20,6 +20,7 @@ OpenAPI Specification 3.0のコンポーネントオブジェクトからZodス�
 
 - 処理するドキュメントは外部への参照を持たず独立している必要がある
     - `$ref` は `#/components/schemas/<component_name>` の形式のみ有効
+    - または事前に解決が必要
 - 以下のキーワードは非対応
     - `anyOf`
     - `not`
