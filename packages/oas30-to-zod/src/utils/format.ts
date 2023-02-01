@@ -1,5 +1,4 @@
-// import { green, yellow } from 'ansis/colors'
-// import fse from 'fs-extra'
+import { green, yellow } from 'ansis/colors'
 import prettier from 'prettier'
 import babelParser from 'prettier/parser-babel.js'
 
@@ -8,36 +7,42 @@ import babelParser from 'prettier/parser-babel.js'
  * @param source - Raw code
  * @returns Formatted code
  */
-export const format = (source: string): string =>
-  prettier.format(source, {
-    parser: 'babel',
-    plugins: [babelParser],
-  })
+export const format = (
+  source: string,
+  inheritPrettier?: boolean | prettier.Options
+): string => {
+  const options = inheritPrettier
+    ? typeof inheritPrettier === 'object'
+      ? inheritPrettier
+      : getPrettierOptions() || {}
+    : {}
 
-/*
-const getPrettierOptions = async (
-  configPath?: string
-): Promise<prettier.Options | null> => {
-  const configFile =
-    configPath && fse.existsSync(configPath)
-      ? configPath
-      : await prettier.resolveConfigFile().then((configFile) => configFile)
+  if (!('parser' in options))
+    Object.assign(options, {
+      parser: 'babel-ts',
+      plugins: [babelParser],
+    })
 
-  if (!configFile) {
-    console.log(yellow`Unable to find Prettier config file.`)
-    return null
-  }
+  return prettier.format(source, options)
+}
 
-  const options = await prettier
-    .resolveConfig(configFile)
-    .then((options) => options)
+/**
+ * Find prettier config and resolve
+ * @returns Prettier options
+ */
+export const getPrettierOptions = (): prettier.Options | null => {
+  const configFile = prettier.resolveConfigFile.sync(process.cwd())
+  const options = prettier.resolveConfig.sync(process.cwd())
 
-  if (!options) {
-    console.log(yellow`Unable to resolve Prettier config file.`)
+  if (!configFile || !options) {
+    console.log(yellow`Unable to find Prettier config in a project.`)
     return null
   }
 
   console.log(green`Resolve Prettier config succeeded:`, configFile)
+  console.group()
+  console.log(options)
+  console.groupEnd()
+
   return options
 }
-*/

@@ -5,6 +5,7 @@ import ejs from 'ejs'
 import fse from 'fs-extra'
 import SwaggerParser from '@apidevtools/swagger-parser'
 import { red } from 'ansis/colors'
+import type { OpenAPI, OpenAPIV3 } from 'openapi-types'
 
 import { defaultParseOptions, parseSchema } from './parseSchema.js'
 import type {
@@ -16,6 +17,7 @@ import type {
 import { format } from './utils/format.js'
 import { generatePrintingOrder } from './utils/generatePrintingOrder.js'
 import { autocompleteObject } from './utils/autocompleteObject.js'
+import { isV3, isValidDoc } from './utils/validateDoc.js'
 
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)
@@ -30,22 +32,12 @@ const defaultOptions: Options = {
   disableRules: [],
   withoutImport: false,
   withoutExport: false,
+  inheritPrettier: false,
   disableFormat: false,
   ...defaultParseOptions,
 }
 
-/**
- * Generate Zod schemas from OpenAPI 3.0 Components Object
- * @param input - Document object or file path
- * @param userOptions - Options
- * @returns Zod schemas (JavaScript)
- */
-export const oasComponentsToZod = async (
-  input: Document | string,
-  userOptions?: Options
-): Promise<string> => {
-  const options: Options = { ...defaultOptions, ...userOptions }
-
+const init = async (input: OpenAPI.Document | string, options: Options) => {
   if (options.output)
     await fse.ensureFile(options.output).catch((err) => {
       console.error(red`Unable to create output file.`)
@@ -55,32 +47,44 @@ export const oasComponentsToZod = async (
   if (options.template && !fse.existsSync(options.template))
     throw new Error(`EJS template does not exists: ${options.template}`)
 
-  const doc: Document =
-    typeof input === 'string'
-      ? ((await SwaggerParser.bundle(input)) as Document)
-      : input
+  const doc =
+    typeof input === 'string' ? await SwaggerParser.bundle(input) : input
 
-  if (!doc.openapi.startsWith('3.0')) {
-    console.error(red`Version mismatch:`, doc.openapi)
+  if (!isV3(doc)) {
+    console.error(
+      red`Document version mismatch. Only version 3.0 is supported.`
+    )
     throw new Error('Only version 3.0 is supported.')
   }
 
-  if (!('components' in doc))
-    throw new Error(`'document.components' does not exists.`)
-  const { components } = doc
+  if (!isValidDoc(doc))
+    throw new Error(`Document has no 'components' or 'schemas'.`)
 
-  if (!('schemas' in components))
-    throw new Error(`'document.componentes.schemas' does not exists.`)
-  const { schemas } = components
+  return doc
+}
+
+/**
+ * Generate Zod schemas from OpenAPI 3.0 Components Object
+ * @param input - Document object or file path
+ * @param userOptions - Options
+ * @returns Zod schemas (JavaScript)
+ */
+export const oasComponentsToZod = async (
+  input: OpenAPIV3.Document | string,
+  userOptions?: Options
+): Promise<string> => {
+  const options: Options = { ...defaultOptions, ...userOptions }
+
+  const doc = await init(input, options)
 
   if (!options.disableAutocomplete) autocompleteObject(doc)
 
   const compGraph: ComponentGraph = { deps: {}, isObject: {} }
 
-  const dereferenced = await SwaggerParser.dereference(
+  const dereferencedDoc = await SwaggerParser.dereference(
     JSON.parse(JSON.stringify(doc))
   ).then((deref) => {
-    const resolvedSchemas = (deref as Document).components!.schemas!
+    const resolvedSchemas = (deref as Document).components.schemas
     Object.entries(resolvedSchemas).forEach(([compName, compSchema]) => {
       if ('type' in compSchema && compSchema.type === 'object')
         compGraph.isObject[compName] = true
@@ -89,11 +93,10 @@ export const oasComponentsToZod = async (
     return deref as Document
   })
 
-  const targetDoc = options.dereference ? dereferenced : doc
-  const targetSchema = options.dereference
-    ? dereferenced.components!.schemas!
-    : schemas
+  const targetDoc = options.dereference ? dereferencedDoc : doc
+  const targetSchema = targetDoc.components.schemas
 
+  // Reserved object for cusomization
   const data: Record<string, any> = {}
 
   const parsedComponents: Record<ComponentName, string> = {}
@@ -106,7 +109,7 @@ export const oasComponentsToZod = async (
       name: compName,
       deps,
       doc: targetDoc,
-      schemas: targetSchema,
+      schemas: targetDoc.components.schemas,
       data,
     })
     compGraph.deps[compName] = deps
@@ -120,7 +123,7 @@ export const oasComponentsToZod = async (
     ? fse.readFileSync(options.template).toString()
     : fse.readFileSync(path.resolve(__dirname, 'default.ts.ejs')).toString()
 
-  const ts = ejs.render(template, {
+  const raw = ejs.render(template, {
     // Processed data
     parsedComponents,
     printingOrder,
@@ -131,9 +134,11 @@ export const oasComponentsToZod = async (
     data,
   })
 
-  const result = options.disableFormat ? ts : format(ts)
+  const parsed = options.disableFormat
+    ? raw
+    : format(raw, options.inheritPrettier)
 
-  if (options.output) fse.outputFile(options.output, result)
+  if (options.output) fse.outputFile(options.output, parsed)
 
-  return result
+  return parsed
 }

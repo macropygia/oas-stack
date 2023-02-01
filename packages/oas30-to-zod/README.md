@@ -12,6 +12,7 @@ Generate Zod schemas from OpenAPI Specification 3.0 Components Object.
 - This package is currently unstable.
     - Breaking changes may occur without any notice.
 - Available as API and CLI.
+- Dual package for CommonJS/ES Modules.
 - Customizable.
     - Parsers are pluggable.
     - Can edit output using [EJS](https://ejs.co/).
@@ -55,23 +56,24 @@ console.log(zodSchemasString);
 
 ### Options
 
-| Name                  | Type              | Default   | Required |
-| :-------------------- | :---------------- | :-------- | :------- |
-| `output`              | `string \| false` | `false`   | No       |
-| `dereference`         | `boolean`         | `false`   | No       |
-| `exportName`          | `string`          | `schemas` | No       |
-| `individually`        | `boolean`         | `false`   | No       |
-| `eslintDisable`       | `boolean`         | `false`   | No       |
-| `disableRules`        | `string[]`        | `[]`      | No       |
-| `withoutImport`       | `boolean`         | `false`   | No       |
-| `withoutExport`       | `boolean`         | `false`   | No       |
-| `disableFormat`       | `boolean`         | `false`   | No       |
-| `withoutDefaults`     | `boolean`         | `false`   | No       |
-| `withDesc`            | `boolean`         | `false`   | No       |
-| `withAnchors`         | `boolean`         | `false`   | No       |
-| `disableAutocomplete` | `boolean`         | `false`   | No       |
-| `template`            | `string`          |           | No       |
-| `parsers`             | `object`          |           | No       |
+| Name                  | Type                | Default   | Required |
+| :-------------------- | :------------------ | :-------- | :------- |
+| `output`              | `string \| false`   | `false`   | No       |
+| `dereference`         | `boolean`           | `false`   | No       |
+| `exportName`          | `string`            | `schemas` | No       |
+| `individually`        | `boolean`           | `false`   | No       |
+| `eslintDisable`       | `boolean`           | `false`   | No       |
+| `disableRules`        | `string[]`          | `[]`      | No       |
+| `withoutImport`       | `boolean`           | `false`   | No       |
+| `withoutExport`       | `boolean`           | `false`   | No       |
+| `inheritPrettier`     | `boolean \| object` | `false`   | No       |
+| `disableFormat`       | `boolean`           | `false`   | No       |
+| `withoutDefaults`     | `boolean`           | `false`   | No       |
+| `withDesc`            | `boolean`           | `false`   | No       |
+| `withAnchors`         | `boolean`           | `false`   | No       |
+| `disableAutocomplete` | `boolean`           | `false`   | No       |
+| `template`            | `string`            |           | No       |
+| `parsers`             | `object`            |           | No       |
 
 #### output
 
@@ -160,6 +162,16 @@ Disable to output import statement.
 Disable to output export statement.
 
 - Remove `export const <exportName> { ... };`
+- Default: `false`
+
+#### inheritPrettier
+
+Inherit Prettier settings from the project or configure it manually.
+
+- By default, Prettier runs with default settings.
+- If set to `true` , Prettier find config file from the project directory.
+    - Use [prettier.resolveConfigFile()](https://prettier.io/docs/en/api.html#prettierresolveconfigfilefilepath) with `process.cwd()` .
+- Can pass Prettier Configuration Schema as an `object` .
 - Default: `false`
 
 #### disableFormat

@@ -1,14 +1,21 @@
+import type prettier from 'prettier'
 import type { OpenAPIV3 } from 'openapi-types'
+
+type Modify<T, R> = Omit<T, keyof R> & R
 
 // ---------------------------------------------------------
 // Document
 
-export type Document = OpenAPIV3.Document
+export interface Document extends OpenAPIV3.Document {
+  components: ComponentsObject
+}
 
 // ---------------------------------------------------------
 // Components
 
-export type ComponentsObject = OpenAPIV3.ComponentsObject
+export interface ComponentsObject extends OpenAPIV3.ComponentsObject {
+  schemas: MixedRecord
+}
 
 // ---------------------------------------------------------
 // Schema Objects
@@ -143,6 +150,7 @@ export interface Options extends ParseOptions {
   disableRules?: string[] // CLI
   withoutImport?: boolean // CLI
   withoutExport?: boolean // CLI
+  inheritPrettier?: boolean | prettier.Options // CLI
   disableFormat?: boolean // CLI
   template?: string // CLI
 }
@@ -156,4 +164,11 @@ export interface ParseOptions {
 }
 
 // CLI options
-export type CliOptions = Options
+export type CliOptions = Modify<
+  Omit<Options, 'parsers'>,
+  {
+    output?: string
+    disableRules?: string
+    inheritPrettier?: boolean
+  }
+>

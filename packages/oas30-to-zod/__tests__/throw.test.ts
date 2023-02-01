@@ -45,7 +45,7 @@ describe('oasComponentsToZod (rejects)', () => {
         // },
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"\'document.components\' does not exists."'
+      "\"Document has no 'components' or 'schemas'.\""
     )
   })
 
@@ -63,7 +63,7 @@ describe('oasComponentsToZod (rejects)', () => {
         },
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"\'document.componentes.schemas\' does not exists."'
+      "\"Document has no 'components' or 'schemas'.\""
     )
   })
 

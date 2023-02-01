@@ -5,11 +5,7 @@ import cac from 'cac' // eslint-disable-line import/no-named-as-default
 import { cyan, green } from 'ansis/colors'
 
 import { oasComponentsToZod } from './oasComponentsToZod.js'
-import type { Options } from './types/index.js'
-
-export interface CliOptions extends Options {
-  output?: string
-}
+import type { CliOptions } from './types/index.js'
 
 const cli = cac('oas30-to-zod')
 
@@ -24,25 +20,27 @@ cli
   .option('-r, --disable-rules <rules>', 'Comma-separated rules to disable (e.g. `no-control-regex`)')
   .option('--without-import', "Disable to output `import { z } from 'zod'`")
   .option('--without-export', "Disable to output `export const schemas = { ... }`")
-  .option('--disable-format', 'Disable prettier')
+  .option('--disable-format', 'Disable Prettier')
+  .option('-p, --inherit-prettier', 'Inherit Prettier settings from the project')
   .option('--without-defaults', 'Disable convert `schema.default` to `.default()`')
   .option('-d, --with-desc', 'Enable convert `schema.description` to `.descrive()`')
   .option('-a, --with-anchors', 'Wrap regex with `^` and `$`')
   .option('--disable-autocomplete', "Disable autocomplete `type: 'object'`")
   .option('-t, --template <path>', 'Template path for EJS')
   .action(async (input: string, options: CliOptions) => {
-  const output: string =
-    options.output ||
-    path.format({...path.parse(input), ...{ ext: '.ts', base: undefined }})
+    const output: string =
+      options.output ||
+      path.format({...path.parse(input), ...{ ext: '.ts', base: undefined }})
 
-  if (options.disableRules && typeof options.disableRules === 'string')
-    options.disableRules = (options.disableRules as string).split(',').map((rule) => rule.trim())
+    const disableRules: string[] = options.disableRules
+      ? options.disableRules.split(',').map((rule) => rule.trim())
+      : []
 
-  await oasComponentsToZod(input, { ...options, output })
+    await oasComponentsToZod(input, { ...options, output, disableRules })
 
-  console.log('oas30-to-zod', cyan`Output:`, output)
-  console.log('oas30-to-zod', green`Done`)
-})
+    console.log('oas30-to-zod', cyan`Output:`, output)
+    console.log('oas30-to-zod', green`Done`)
+  })
 
 cli.help()
 
