@@ -4,6 +4,8 @@
 [![MIT](https://img.shields.io/npm/l/oas30-to-zod?style=flat-square)](./LICENSE)
 [![Codecov](https://img.shields.io/codecov/c/github/macropygia/oas-stack?token=U3HD8ZUF98&style=flat-square&logo=codecov)](https://codecov.io/gh/macropygia/oas-stack)
 
+**English** | [日本語](README.ja_JP.md)
+
 Generate Zod schemas from OpenAPI Specification 3.0 Components Object.
 
 - Not compatible with OpenAPI Specification 3.1.
@@ -211,7 +213,7 @@ Disable autocomplete for objects with missing `type: 'object'` .
 Use a user-specific [EJS](https://ejs.co/) template.
 
 - Sets the path to the template file.
-- Default: [default.ts.ejs](https://github.com/macropygia/oas-stack/src/default.ts.ejs)
+- Default: [default.ts.ejs](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/default.ts.ejs)
 
 #### parsers
 
@@ -248,17 +250,17 @@ const options = {
 ```ts
 type StringPreset =
   // Change the processing order of keywords insert after `.string()`
-  | 'minmax-regex-format' |
-  | 'minmax-format-regex' |
-  | 'regex-format-minmax' |
-  | 'regex-minmax-format' |
-  | 'format-minmax-regex' |
-  | 'format-regex-minmax' |
+  | 'minmax-regex-format'
+  | 'minmax-format-regex'
+  | 'regex-format-minmax'
+  | 'regex-minmax-format'
+  | 'format-minmax-regex'
+  | 'format-regex-minmax'
 ```
 
 ##### User-specific parser
 
-See [type definitions](https://github.com/macropygia/oas-stack/src/types/index.ts) for details.  
+See [type definitions](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts) for details.  
 Complex processing is possible when combined with a user-specific template.
 
 ## CLI
