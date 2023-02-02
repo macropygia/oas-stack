@@ -55,12 +55,12 @@ jobs:
         uses: changesets/action@v1
         with:
           # Update pnpm-lock.yaml
-          version: pnpm exec changeset version && pnpm install --no-frozen-lockfile
-          publish: pnpm exec changeset publish
+          version: pnpm ci:version
+          publish: pnpm ci:publish
           # PR title
-          # title: '[ci] release'
+          title: '[ci] release'
           # Commit message
-          # commit: '[ci] release'
+          commit: '[ci] release'
           createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
