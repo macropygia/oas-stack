@@ -74,9 +74,9 @@ jobs:
         id: jq
         if: steps.changesets.outputs.published == 'true'
         run: |
-          flags=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name | split("/") | .[1]' | jq -s -j 'join(",")'`
+          flags=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name' | jq -s -j 'join(",")'`
           echo "CODECOV_FLAGS=$flags" >> $GITHUB_OUTPUT
-          files=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name | split("/") | .[1]' | jq -s -j 'map("packages/" + . + "/coverage/coverage-final.json") | join(",")'`
+          files=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name' | jq -s -j 'map("packages/" + . + "/coverage/coverage-final.json") | join(",")'`
           echo "CODECOV_FILES=$files" >> $GITHUB_OUTPUT
 
       - name: DEBUG / Show jq outputs
