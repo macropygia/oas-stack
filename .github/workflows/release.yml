@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "PNPM_CACHE_DIR=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.PNPM_CACHE_DIR }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Setup npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+
+      - name: Create release PR or publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Update pnpm-lock.yaml
+          version: pnpm exec changeset version && pnpm install --no-frozen-lockfile
+          publish: pnpm exec changeset publish
+          # PR title
+          title: '[ci] release'
+          # Commit message
+          commit: '[ci] release'
+          createGithubReleases: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: DEBUG / Show changesets outputs
+        run: |
+          echo ${{ steps.changesets.outputs.published }}
+          echo ${{ steps.changesets.outputs.publishedPackages }}
+
+      - name: Convert publishedPackages to comma separated string using jq
+        id: jq
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          flags=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name | split("/") | .[1]' | jq -s -j 'join(",")'`
+          echo "CODECOV_FLAGS=$flags" >> $GITHUB_OUTPUT
+          files=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name | split("/") | .[1]' | jq -s -j 'map("packages/" + . + "/coverage/coverage-final.json") | join(",")'`
+          echo "CODECOV_FILES=$files" >> $GITHUB_OUTPUT
+
+      - name: DEBUG / Show jq outputs
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo ${{ steps.jq.outputs.CODECOV_FLAGS }}
+          echo ${{ steps.jq.outputs.CODECOV_FILES }}
+
+      - name: Upload coverage to Codecov
+        if: steps.changesets.outputs.published == 'true'
+        uses: codecov/codecov-action@v3
+        with:
+          flags: ${{ steps.jq.outputs.CODECOV_FLAGS }}
+          files: ${{ steps.jq.outputs.CODECOV_FILES }}
+          verbose: true
+          dry_run: true
