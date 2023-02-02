@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.4
+
+### Patch Changes
+
+- 4c440c6: Update docs
+
 ## 0.0.3
 
 ### Patch Changes
