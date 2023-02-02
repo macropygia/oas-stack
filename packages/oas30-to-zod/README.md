@@ -11,6 +11,7 @@ Generate Zod schemas from OpenAPI Specification 3.0 Components Object.
 - Not compatible with OpenAPI Specification 3.1.
 - This package is currently unstable.
     - Breaking changes may occur without any notice.
+    - See [CHANGELOG](./CHANGELOG.md) for changes.
 - Available as API and CLI.
 - Dual package for CommonJS/ES Modules.
 - Customizable.

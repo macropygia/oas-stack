@@ -10,6 +10,7 @@ OpenAPI Specification 3.0のコンポーネントからZodスキーマを生成�
 
 - OpenAPI 3.1との互換性なし
 - 不安定版につき予告なく破壊的変更が行われる可能性あり
+    - 変更点は [CHANGELOG](./CHANGELOG.md) を参照
 - CLIおよびAPIとして使用可能
 - CommonJS/ES Modules両対応デュアルパッケージ
 - カスタマイズ可能
