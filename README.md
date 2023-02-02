@@ -11,3 +11,8 @@
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088ff?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 Tiny tools for OpenAPI Specification.
+
+## Projects
+
+- [oas30-to-zod](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod#readme)
+    - Generate Zod schemas from OpenAPI Specification 3.0 Components Object.

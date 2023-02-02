@@ -16,4 +16,4 @@
 
 ### Patch Changes
 
-- Initial release
+- 252f14b: Initial release

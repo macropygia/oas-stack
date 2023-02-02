@@ -303,6 +303,7 @@ $ oas30-to-zod oas_document.yml # --> output `oas_document.ts`
 | `--disable-rules <rules>` |   `-r`    |
 | `--without-import`        |           |
 | `--without-export`        |           |
+| `--inherit-prettier`      |   `-p`    |
 | `--disable-format`        |           |
 | `--without-defaults`      |           |
 | `--with-desc`             |   `-d`    |

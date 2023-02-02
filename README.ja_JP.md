@@ -11,3 +11,8 @@
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088ff?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 OpenAPI Specification関連の小物類
+
+## プロジェクト
+
+- [oas30-to-zod](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod#readme)
+    - OpenAPI Specification 3.0のコンポーネントからZodスキーマを生成する
