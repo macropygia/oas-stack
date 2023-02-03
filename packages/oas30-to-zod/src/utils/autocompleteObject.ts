@@ -1,4 +1,4 @@
-import type { Document, SchemaObject } from '../types/index.js'
+import type { Document } from '../types/index.js'
 
 /**
  * Add `type: 'object'` to the schema that has only `properties` or `additionalProperties` .
@@ -9,13 +9,12 @@ export const autocompleteObject = (doc: Document) => {
 
   const schemas = doc.components.schemas
 
-  for (const comp of Object.keys(schemas)) {
-    if ('$ref' in schemas[comp]!) continue
+  Object.values(schemas).forEach((schema) => {
     if (
-      ('properties' in schemas[comp]! ||
-        'additionalProperties' in schemas[comp]!) &&
-      !('type' in schemas[comp]!)
+      !('$ref' in schema) &&
+      ('properties' in schema || 'additionalProperties' in schema) &&
+      !('type' in schema)
     )
-      (schemas[comp] as SchemaObject).type = 'object'
-  }
+      schema.type = 'object'
+  })
 }

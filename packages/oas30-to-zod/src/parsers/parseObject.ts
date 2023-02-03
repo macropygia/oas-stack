@@ -1,4 +1,5 @@
 import { red } from 'ansis/colors'
+import type { OpenAPIV3 } from 'openapi-types'
 
 import type {
   NonArraySchemaObject,
@@ -29,16 +30,7 @@ const parseChildren = (
   schema: NonArraySchemaObject & { type: 'object' },
   ctx: ParseContext
 ) => {
-  const children = Object.entries(schema.properties ?? {}).map(
-    ([key, childSchema]) =>
-      `${JSON.stringify(key)}:${parseSchema(childSchema, ctx)}${
-        (!ctx.options.withoutDefaults && 'default' in childSchema) || // `.default()` exists
-        !schema.required ||
-        !schema.required.includes(key)
-          ? '.optional()'
-          : ''
-      }`
-  )
+  const children = parseProperties(schema, ctx)
 
   if (schema.additionalProperties === true)
     return `z.object({${children}}).catchall(z.any())`
@@ -54,6 +46,27 @@ const parseChildren = (
 
   return `z.object({${children}})`
 }
+
+const parseProperties = (
+  schema: OpenAPIV3.NonArraySchemaObject,
+  ctx: ParseContext
+) =>
+  Object.entries(schema.properties ?? {}).map(([childName, childSchema]) => {
+    const parsed = `${JSON.stringify(childName)}:${parseSchema(
+      childSchema,
+      ctx
+    )}`
+
+    if (
+      // No need to add `.optional()` if `.default()` exists
+      (!ctx.options.withoutDefaults && 'default' in childSchema) ||
+      !schema.required ||
+      !schema.required.includes(childName)
+    )
+      return `${parsed}.optional()`
+
+    return parsed
+  })
 
 const parseWithoutChildren = (
   addProps: boolean | ReferenceObject | SchemaObject,

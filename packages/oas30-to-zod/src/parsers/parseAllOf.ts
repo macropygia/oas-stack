@@ -1,6 +1,6 @@
 import { red, yellow } from 'ansis/colors'
 
-import type { AllOfParser, MixedObject } from '../types/index.js'
+import type { AllOfParser, MixedObject, ParseContext } from '../types/index.js'
 import { half } from '../utils/half.js'
 import { parseSchema } from '../parseSchema.js'
 
@@ -22,23 +22,7 @@ export const parseAllOf: AllOfParser = (schema, ctx) => {
   }
 
   // 'allOf' has multiple objects
-  if (
-    schema.allOf.filter((element) => {
-      if ('type' in element && element.type === 'object') return false
-      if ('$ref' in element) {
-        const comp = getComponentNameFromRef(element.$ref)
-        if (!comp) {
-          console.error(
-            ctx.name,
-            red`'$ref' references an unknown object. (maybe external)`
-          )
-          throw new Error(`'$ref' references an unknown object.`)
-        }
-        if (ctx.graph?.isObject[comp] === true) return false
-      }
-      return true
-    }).length === 0
-  ) {
+  if (doesAllOfContainOnlyObject(schema.allOf, ctx)) {
     return schema.allOf
       .map((schema, index) => {
         if (index === 0) return parseSchema(schema, ctx)
@@ -60,3 +44,29 @@ export const parseAllOf: AllOfParser = (schema, ctx) => {
     ctx
   )})`
 }
+
+/**
+ * Check if all the schemas that allOf has are objects.
+ * @param schemaList - Array of schemas
+ * @param ctx - Context
+ * @returns boolean
+ */
+const doesAllOfContainOnlyObject = (
+  schemaList: MixedObject[],
+  ctx: ParseContext
+) =>
+  schemaList.filter((element) => {
+    if ('type' in element && element.type === 'object') return false
+    if ('$ref' in element) {
+      const compName = getComponentNameFromRef(element.$ref)
+      if (!compName) {
+        console.error(
+          ctx.name,
+          red`'$ref' references an unknown object. (maybe external)`
+        )
+        throw new Error(`'$ref' references an unknown object.`)
+      }
+      if (ctx.graph?.isObject[compName] === true) return false
+    }
+    return true
+  }).length === 0
