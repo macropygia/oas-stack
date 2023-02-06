@@ -1,3 +1,5 @@
+import { magenta } from 'ansis/colors'
+
 import type { MixedObject, ParseContext, ParseOptions } from './types/index.js'
 import { addDefault } from './parsers/utils/addDefault.js'
 import { addDesc } from './parsers/utils/addDesc.js'
@@ -13,7 +15,10 @@ const parseSchema = (schema: MixedObject, ctx: ParseContext): string => {
   ctx.options = { ...defaultParseOptions, ...ctx.options }
   const { withoutDefaults, withDesc } = ctx.options
 
-  if (typeof schema !== 'object') return 'z.unknown()'
+  if (typeof schema !== 'object') {
+    console.error(magenta`Input is not an object. Returns 'z.unknown()'.`)
+    return 'z.unknown()'
+  }
 
   let parsed = parseByType(schema, ctx)
 
