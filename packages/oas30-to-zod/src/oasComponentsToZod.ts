@@ -112,7 +112,7 @@ export const oasComponentsToZod = async (
     ? raw
     : format(raw, options.inheritPrettier)
 
-  if (options.output) fse.outputFile(options.output, parsed)
+  if (options.output) fse.outputFileSync(options.output, parsed)
 
   return parsed
 }
