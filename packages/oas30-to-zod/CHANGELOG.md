@@ -1,5 +1,12 @@
 # oas30-to-zod
 
+## 0.0.5
+
+### Patch Changes
+
+- 9b590d0: Fix to wait for file output
+- 3fee90a: Add error message for invalid input to parser
+
 ## 0.0.4
 
 ### Patch Changes
