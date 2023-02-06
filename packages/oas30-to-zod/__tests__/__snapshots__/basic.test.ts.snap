@@ -110,18 +110,6 @@ export const schemas = {
 "
 `;
 
-exports[`oasComponentsToZod (basic) > Dereference 1`] = `
-"const Comp1 = z.object({
-  Prop1: z.string().optional(),
-  Prop2: z.number().optional(),
-});
-const Comp2 = z.object({
-  Prop1: z.string().optional(),
-  Prop2: z.number().optional(),
-});
-"
-`;
-
 exports[`oasComponentsToZod (basic) > Disable format 1`] = `
 "import { z } from 'zod';
 
@@ -206,5 +194,17 @@ export const schemas = {
   OneOfMultiple,
   OneOfNone
 };
+"
+`;
+
+exports[`oasComponentsToZod (basic) > Enable dereference 1`] = `
+"const Comp1 = z.object({
+  Prop1: z.string().optional(),
+  Prop2: z.number().optional(),
+});
+const Comp2 = z.object({
+  Prop1: z.string().optional(),
+  Prop2: z.number().optional(),
+});
 "
 `;

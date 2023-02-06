@@ -1,5 +1,5 @@
 import fse from 'fs-extra'
-import { describe, test, expect, afterAll, beforeAll } from 'vitest'
+import { describe, test, expect } from 'vitest'
 
 import { oasComponentsToZod } from '../src/oasComponentsToZod.js'
 
@@ -9,19 +9,6 @@ const minimumOutput = {
 }
 
 describe('oasComponentsToZod (basic)', async () => {
-  beforeAll(async () => {
-    // for Output
-    await oasComponentsToZod('__tests__/minimum.yml', {
-      ...minimumOutput,
-      output: '__tests__/basic.ts',
-    })
-  })
-
-  afterAll(() => {
-    // for Output
-    fse.removeSync('__tests__/basic.ts')
-  })
-
   test('Default', async () => {
     await expect(
       oasComponentsToZod('__tests__/basic.yml')
@@ -36,15 +23,22 @@ describe('oasComponentsToZod (basic)', async () => {
     ).resolves.toMatchSnapshot()
   })
 
-  test('Output', () => {
-    expect(fse.readFileSync('__tests__/basic.ts').toString())
+  test('Enable output', async () => {
+    await oasComponentsToZod('__tests__/minimum.yml', {
+      ...minimumOutput,
+      output: '__tests__/minimum.ts',
+    })
+
+    expect(fse.readFileSync('__tests__/minimum.ts').toString())
       .toMatchInlineSnapshot(`
       "const Minimum = z.string();
       "
     `)
+
+    fse.removeSync('__tests__/minimum.ts')
   })
 
-  test('Dereference', async () => {
+  test('Enable dereference', async () => {
     await expect(
       oasComponentsToZod('__tests__/dereference.yml', {
         ...minimumOutput,
@@ -172,7 +166,7 @@ describe('oasComponentsToZod (basic)', async () => {
     `)
   })
 
-  test('Use parser preset', async () => {
+  test('Use preset', async () => {
     await expect(
       oasComponentsToZod('__tests__/string.yml', {
         ...minimumOutput,

@@ -3,7 +3,7 @@ import { describe, test, expect } from 'vitest'
 import { generatePrintingOrder } from './generatePrintingOrder.js'
 
 describe('generatePrintingOrder', () => {
-  test('default', () => {
+  test('Default', () => {
     expect(
       generatePrintingOrder({
         c1: ['c6'],

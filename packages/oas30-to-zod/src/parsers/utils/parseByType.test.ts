@@ -10,7 +10,7 @@ const ctx: ParseContext = {
 }
 
 describe('parseByType', () => {
-  test('reference', () => {
+  test('Reference', () => {
     expect(
       parseByType(
         {
@@ -21,79 +21,79 @@ describe('parseByType', () => {
     ).toBe('Component')
   })
 
-  test('nullable', () => {
+  test('Nullable', () => {
     expect(
       parseByType({ type: 'string', nullable: true }, ctx)
     ).toMatchInlineSnapshot('"z.string().nullable()"')
   })
 
-  test('allOf', () => {
+  test('AllOf', () => {
     expect(parseByType({ allOf: [] }, ctx)).toMatchInlineSnapshot(
       '"z.undefined()"'
     )
   })
 
   // Unsupported
-  test('anyOf', () => {
+  test('AnyOf', () => {
     expect(parseByType({ anyOf: [] }, ctx)).toMatchInlineSnapshot(
       '"z.undefined()"'
     )
   })
 
-  test('oneOf', () => {
+  test('OneOf', () => {
     expect(parseByType({ oneOf: [{}, {}] }, ctx)).toMatchInlineSnapshot(
       '"z.union([z.undefined(),z.undefined()])"'
     )
   })
 
   // Unsupported
-  test('not', () => {
+  test('Not', () => {
     expect(parseByType({ not: {} }, ctx)).toMatchInlineSnapshot(
       '"z.undefined()"'
     )
   })
 
-  test('object', () => {
+  test('Object', () => {
     expect(parseByType({ type: 'object' }, ctx)).toMatchInlineSnapshot(
       '"z.undefined()"'
     )
   })
 
-  test('array', () => {
+  test('Array', () => {
     expect(
       parseByType({ type: 'array', items: {} }, ctx)
     ).toMatchInlineSnapshot('"z.array(z.undefined())"')
   })
 
-  test('enum', () => {
+  test('Enum', () => {
     expect(parseByType({ enum: [] }, ctx)).toMatchInlineSnapshot('"z.enum([])"')
   })
 
-  test('string', () => {
+  test('String', () => {
     expect(parseByType({ type: 'string' }, ctx)).toMatchInlineSnapshot(
       '"z.string()"'
     )
   })
 
-  test('number', () => {
+  test('Number', () => {
     expect(parseByType({ type: 'number' }, ctx)).toMatchInlineSnapshot(
       '"z.number()"'
     )
   })
 
-  test('integer', () => {
+  test('Integer', () => {
     expect(parseByType({ type: 'integer' }, ctx)).toMatchInlineSnapshot(
       '"z.number().int()"'
     )
   })
 
-  test('boolean', () => {
+  test('Boolean', () => {
     expect(parseByType({ type: 'boolean' }, ctx)).toMatchInlineSnapshot(
       '"z.boolean()"'
     )
   })
 
-  test('default', () => {
+  test('Default', () => {
     expect(parseByType({}, ctx)).toMatchInlineSnapshot('"z.undefined()"')
   })
 })

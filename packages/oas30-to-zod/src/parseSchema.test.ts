@@ -11,7 +11,7 @@ const ctx: ParseContext = {
 }
 
 describe('parseSchema', () => {
-  test('default', () => {
+  test('Default', () => {
     expect(
       parseSchema(
         { type: 'string', description: 'description', default: 'default' },
@@ -22,7 +22,7 @@ describe('parseSchema', () => {
     )
   })
 
-  test('non-object', () => {
+  test('Non-object', () => {
     /* @ts-ignore */
     expect(parseSchema('', ctx)).toMatchInlineSnapshot('"z.unknown()"')
   })

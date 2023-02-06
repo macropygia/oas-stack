@@ -6,7 +6,7 @@
 
 **English** | [日本語](README.ja_JP.md)
 
-Generate Zod schemas from OpenAPI Specification 3.0 Components Object.
+Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 Components Object.
 
 - Not compatible with OpenAPI Specification 3.1.
 - This package is currently unstable.
@@ -273,7 +273,7 @@ type StringPreset =
 
 ##### User-specific parser
 
-See [type definitions](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts) for details.  
+See [default parsers](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod/src/parsers) and [type definitions](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts).  
 Complex processing is possible when combined with a user-specific template.
 
 ## CLI

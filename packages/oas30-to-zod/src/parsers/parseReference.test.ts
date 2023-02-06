@@ -16,7 +16,7 @@ describe('parseReference', () => {
     ).toBe('Component')
   })
 
-  test('Wrong internal reference', () => {
+  test('Invalid internal reference', () => {
     expect(() =>
       parseReference({ $ref: '#/path/to/Component' }, ctx)
     ).toThrowErrorMatchingInlineSnapshot(

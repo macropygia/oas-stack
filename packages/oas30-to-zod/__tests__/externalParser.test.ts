@@ -39,57 +39,57 @@ const ctx: ParseContext = {
 }
 
 describe('External Parser', () => {
-  test('reference', () => {
+  test('Reference', () => {
     expect(parseReference({ $ref: '#/components/schema/Component' }, ctx)).toBe(
       'dummy'
     )
   })
 
-  test('nullable', () => {
+  test('Nullable', () => {
     expect(parseNullable({ type: 'string', nullable: true }, ctx)).toBe('dummy')
   })
 
-  test('allOf', () => {
+  test('AllOf', () => {
     expect(parseAllOf({ allOf: [] }, ctx)).toBe('dummy')
   })
 
-  test('anyOf', () => {
+  test('AnyOf', () => {
     expect(parseAnyOf({ anyOf: [] }, ctx)).toBe('dummy')
   })
 
-  test('oneOf', () => {
+  test('OneOf', () => {
     expect(parseOneOf({ oneOf: [{}, {}] }, ctx)).toBe('dummy')
   })
 
-  test('not', () => {
+  test('Not', () => {
     expect(parseNot({ not: {} }, ctx)).toBe('dummy')
   })
 
-  test('object', () => {
+  test('Object', () => {
     expect(parseObject({ type: 'object' }, ctx)).toBe('dummy')
   })
 
-  test('array', () => {
+  test('Array', () => {
     expect(parseArray({ type: 'array', items: {} }, ctx)).toBe('dummy')
   })
 
-  test('enum', () => {
+  test('Enum', () => {
     expect(parseEnum({ enum: [] }, ctx)).toBe('dummy')
   })
 
-  test('string', () => {
+  test('String', () => {
     expect(parseString({ type: 'string' }, ctx)).toBe('dummy')
   })
 
-  test('number, integer', () => {
+  test('Number/Integer', () => {
     expect(parseNumber({ type: 'number' }, ctx)).toBe('dummy')
   })
 
-  test('boolean', () => {
+  test('Boolean', () => {
     expect(parseBoolean({ type: 'boolean' }, ctx)).toBe('dummy')
   })
 
-  test('default', () => {
+  test('Default', () => {
     expect(parseDefault({}, ctx)).toBe('dummy')
   })
 })

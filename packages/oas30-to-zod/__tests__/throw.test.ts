@@ -13,7 +13,7 @@ describe('oasComponentsToZod (rejects)', () => {
     )
   })
 
-  test('Version Mismatch', async () => {
+  test('Version mismatch', async () => {
     await expect(() =>
       oasComponentsToZod({
         openapi: '3.1.0',
@@ -31,7 +31,7 @@ describe('oasComponentsToZod (rejects)', () => {
     )
   })
 
-  test('Components does not exists', async () => {
+  test('Document has no components', async () => {
     await expect(() =>
       oasComponentsToZod({
         openapi: '3.0.0',
@@ -49,7 +49,7 @@ describe('oasComponentsToZod (rejects)', () => {
     )
   })
 
-  test('Schemas does not exists', async () => {
+  test('Components has no schemas', async () => {
     await expect(() =>
       oasComponentsToZod({
         openapi: '3.0.0',
@@ -67,7 +67,7 @@ describe('oasComponentsToZod (rejects)', () => {
     )
   })
 
-  test('Template does not exists', async () => {
+  test('External template does not exists', async () => {
     await expect(() =>
       oasComponentsToZod('__tests__/basic.yml', {
         template: 'nothing.ts.ejs',

@@ -3,7 +3,7 @@ import { describe, test, expect } from 'vitest'
 import { half } from './half.js'
 
 describe('half', () => {
-  test('default', () => {
+  test('Default', () => {
     expect(half([1, 2, 3, 4, 5])).toMatchInlineSnapshot(`
       [
           [
@@ -19,7 +19,7 @@ describe('half', () => {
     `)
   })
 
-  test('empty', () => {
+  test('Empty', () => {
     expect(half([])).toMatchInlineSnapshot(`
       [
           [],

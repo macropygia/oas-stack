@@ -14,107 +14,107 @@ import {
 } from './typeCheck.js'
 
 describe('typeCheck', () => {
-  test('reference', () => {
+  test('Reference', () => {
     expect(isReference({ $ref: '#/components/schemas/Component' })).toBeTruthy()
   })
 
-  test('not reference', () => {
+  test('Not reference', () => {
     expect(isReference({})).toBeFalsy()
   })
 
-  test('nullable', () => {
+  test('Nullable', () => {
     expect(isNullable({ nullable: true })).toBeTruthy()
   })
 
-  test('not nullable', () => {
+  test('Not nullable', () => {
     expect(isNullable({})).toBeFalsy()
   })
 
-  test('allOf', () => {
+  test('AllOf', () => {
     expect(isAllOf({ allOf: [] })).toBeTruthy()
   })
 
-  test('not allOf', () => {
+  test('Not allOf', () => {
     expect(isAllOf({})).toBeFalsy()
   })
 
-  test('anyOf', () => {
+  test('AnyOf', () => {
     expect(isAnyOf({ anyOf: [] })).toBeTruthy()
   })
 
-  test('not anyOf', () => {
+  test('Not anyOf', () => {
     expect(isAnyOf({})).toBeFalsy()
   })
 
-  test('oneOf', () => {
+  test('OneOf', () => {
     expect(isOneOf({ oneOf: [] })).toBeTruthy()
   })
 
-  test('not oneOf', () => {
+  test('Not oneOf', () => {
     expect(isOneOf({})).toBeFalsy()
   })
 
-  test('not', () => {
+  test('Not', () => {
     expect(isNot({ not: {} })).toBeTruthy()
   })
 
-  test('not not', () => {
+  test('Not not', () => {
     expect(isNot({})).toBeFalsy()
   })
 
-  test('object', () => {
+  test('Object', () => {
     expect(isObject({ type: 'object' })).toBeTruthy()
   })
 
-  test('not object', () => {
+  test('Not object', () => {
     expect(isObject({})).toBeFalsy()
   })
 
-  test('array', () => {
+  test('Array', () => {
     expect(isArray({ type: 'array', items: {} })).toBeTruthy()
   })
 
-  test('not array', () => {
+  test('Not array', () => {
     expect(isArray({})).toBeFalsy()
   })
 
-  test('enum', () => {
+  test('Enum', () => {
     expect(isEnum({ enum: [] })).toBeTruthy()
   })
 
-  test('not enum', () => {
+  test('Not enum', () => {
     expect(isEnum({})).toBeFalsy()
   })
 
-  test('string', () => {
+  test('String', () => {
     expect(isPrimitive({ type: 'string' }, 'string')).toBeTruthy()
   })
 
-  test('not string', () => {
+  test('Not string', () => {
     expect(isPrimitive({}, 'string')).toBeFalsy()
   })
 
-  test('number', () => {
+  test('Number', () => {
     expect(isPrimitive({ type: 'number' }, 'number')).toBeTruthy()
   })
 
-  test('not number', () => {
+  test('Not number', () => {
     expect(isPrimitive({}, 'number')).toBeFalsy()
   })
 
-  test('integer', () => {
+  test('Integer', () => {
     expect(isPrimitive({ type: 'integer' }, 'integer')).toBeTruthy()
   })
 
-  test('not integer', () => {
+  test('Not integer', () => {
     expect(isPrimitive({}, 'integer')).toBeFalsy()
   })
 
-  test('boolean', () => {
+  test('Boolean', () => {
     expect(isPrimitive({ type: 'boolean' }, 'boolean')).toBeTruthy()
   })
 
-  test('not boolean', () => {
+  test('Not boolean', () => {
     expect(isPrimitive({}, 'boolean')).toBeFalsy()
   })
 })

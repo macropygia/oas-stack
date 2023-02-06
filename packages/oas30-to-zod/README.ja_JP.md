@@ -6,7 +6,7 @@
 
 [English](README.md) | **日本語**
 
-OpenAPI Specification 3.0のコンポーネントからZodスキーマを生成する。
+OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)スキーマを生成する。
 
 - OpenAPI 3.1との互換性なし
 - 不安定版につき予告なく破壊的変更が行われる可能性あり

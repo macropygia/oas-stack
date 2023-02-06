@@ -31,7 +31,7 @@ const doc: Document = {
 }
 
 describe('autocompleteObject', () => {
-  test('default', () => {
+  test('Valid', () => {
     autocompleteObject(doc)
     expect(doc).toMatchInlineSnapshot(`
       {
@@ -64,7 +64,7 @@ describe('autocompleteObject', () => {
     `)
   })
 
-  test('invalid', () => {
+  test('Invalid', () => {
     /* @ts-ignore */
     expect(() => autocompleteObject({})).toThrowErrorMatchingInlineSnapshot(
       '"Invalid document."'

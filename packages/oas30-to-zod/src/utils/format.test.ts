@@ -4,33 +4,21 @@ import { describe, test, expect } from 'vitest'
 import { format, getPrettierOptions } from './format.js'
 
 describe('format', () => {
-  test('default', () => {
+  test('Default', () => {
     expect(format(`const foo='bar'`)).toMatchInlineSnapshot(`
       "const foo = "bar";
       "
     `)
   })
 
-  test('project', () => {
+  test('Use project settings', () => {
     expect(format(`const foo='bar'`, true)).toMatchInlineSnapshot(`
       "const foo = 'bar'
       "
     `)
   })
 
-  test('object', () => {
-    expect(
-      format(`const foo='bar'`, {
-        singleQuote: false,
-        semi: false,
-      })
-    ).toMatchInlineSnapshot(`
-      "const foo = "bar"
-      "
-    `)
-  })
-
-  test('missing', () => {
+  test('Try to use project settings but missing', () => {
     fse.moveSync('../../.prettierrc', '../../.notprettierrc')
 
     expect(format(`const foo='bar'`, true)).toMatchInlineSnapshot(`
@@ -41,7 +29,21 @@ describe('format', () => {
     fse.moveSync('../../.notprettierrc', '../../.prettierrc')
   })
 
-  test('getPrettierOptions', () => {
+  test('Setting directly by the object', () => {
+    expect(
+      format(`const foo='bar'`, {
+        singleQuote: false,
+        semi: false,
+      })
+    ).toMatchInlineSnapshot(`
+      "const foo = "bar"
+      "
+    `)
+  })
+})
+
+describe('getPrettierOptions', () => {
+  test('Default', () => {
     expect(getPrettierOptions()).toMatchInlineSnapshot(`
       {
           "semi": false,

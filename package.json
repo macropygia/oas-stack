@@ -13,7 +13,7 @@
     "url": "https://github.com/macropygia/oas-stack/issues"
   },
   "scripts": {
-    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+    "ci:version": "changeset version",
     "ci:publish": "changeset publish",
     "lint": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}",
     "prettier": "prettier --write --ignore-unknown **/*",

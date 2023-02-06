@@ -24,7 +24,7 @@ describe('parseAllOf', () => {
     ).toMatchInlineSnapshot('"z.intersection(Component1,Component2)"')
   })
 
-  test('Multiple elements with wrong internal reference', () => {
+  test('Multiple elements with invalid internal reference', () => {
     expect(() =>
       parseAllOf(
         {
