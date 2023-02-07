@@ -149,21 +149,21 @@ describe('oasComponentsToZod (basic)', async () => {
     `)
   })
 
+  test('Complex regex', async () => {
+    await expect(
+      oasComponentsToZod('__tests__/regex.yml', {
+        ...minimumOutput,
+      })
+    ).resolves.toMatchSnapshot()
+  })
+
   test('Wrap regex with anchors', async () => {
     await expect(
-      oasComponentsToZod('__tests__/string.yml', {
+      oasComponentsToZod('__tests__/regex.yml', {
         ...minimumOutput,
         withAnchors: true,
       })
-    ).resolves.toMatchInlineSnapshot(`
-      "const Minimum = z
-        .string()
-        .min(1)
-        .max(10)
-        .regex(new RegExp("^[a-z]+$"))
-        .default("foo");
-      "
-    `)
+    ).resolves.toMatchSnapshot()
   })
 
   test('Use preset', async () => {

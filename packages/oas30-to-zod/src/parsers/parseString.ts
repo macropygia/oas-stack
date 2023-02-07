@@ -43,8 +43,9 @@ const stringParser = {
     if (!schema.pattern) return
     const pattern = escapeControlCharacters(schema.pattern)
     if (ctx.options.withAnchors)
-      fragments.push(`.regex(new RegExp("^${pattern}$"))`)
-    else fragments.push(`.regex(new RegExp("${pattern}"))`)
+      fragments.push(`.regex(new RegExp(${JSON.stringify(`^${pattern}$`)}))`)
+    else fragments.push(`.regex(new RegExp(${JSON.stringify(pattern)}))`)
+    // else fragments.push(`.regex(new RegExp("${pattern}"))`)
   },
   format: (
     schema: SchemaObject & { type: 'string' },
