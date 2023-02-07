@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.6
+
+### Patch Changes
+
+- 0861fdd: Fix escape problem with regex
+
 ## 0.0.5
 
 ### Patch Changes
