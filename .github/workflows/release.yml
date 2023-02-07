@@ -76,7 +76,7 @@ jobs:
         run: |
           flags=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name' | jq '. | if(startswith("@")) then split("/") | .[1] else . end' | jq -s -j 'join(",")'`
           echo "CODECOV_FLAGS=$flags" >> $GITHUB_OUTPUT
-          flags=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name' | jq '. | if(startswith("@")) then split("/") | .[1] else . end' | jq -s -j 'map("packages/" + . + "/coverage/coverage-final.json") | join(",")'`
+          files=`echo '${{ steps.changesets.outputs.publishedPackages }}' | jq '.[].name' | jq '. | if(startswith("@")) then split("/") | .[1] else . end' | jq -s -j 'map("packages/" + . + "/coverage/coverage-final.json") | join(",")'`
           echo "CODECOV_FILES=$files" >> $GITHUB_OUTPUT
 
       - name: DEBUG / Show jq outputs
