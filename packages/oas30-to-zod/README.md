@@ -6,24 +6,24 @@
 
 **English** | [日本語](README.ja_JP.md)
 
-Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 Components Object.
+Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 components object.
 
-- Not compatible with OpenAPI Specification 3.1.
+- Incompatible with OpenAPI Specification 3.1.
 - This package is currently unstable.
     - Breaking changes may occur without any notice.
     - See [CHANGELOG](./CHANGELOG.md) for changes.
 - Available as API and CLI.
-- Dual package for CommonJS/ES Modules.
+- Dual package for CommonJS/ES modules.
 - Customizable.
     - Parsers are pluggable.
-    - Can edit output using [EJS](https://ejs.co/).
+    - Can edit output with [EJS](https://ejs.co/).
 - References
     - [OpenAPI Specification 3.0.3](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
     - [Data Models (Schemas) - OpenAPI Guide](https://swagger.io/docs/specification/data-models/)
 
 ## Limitations
 
-- Document must be stand-alone.
+- Document must be standalone.
     - `$ref` works only with `#/components/schemas/<component_name>` format.
     - Or dereference before processing.
 - These keywords are not supported.
@@ -78,22 +78,22 @@ console.log(zodSchemasString);
 
 #### output
 
-Output path for the `.ts` file.
+The output path for the `.ts` file.
 
-- If set `false`, returns string.
+- If set to `false`, returns string.
 - Default: `false`
 
 #### dereference
 
-Use dereferenced document.
+Dereference the document before processing.
 
-- Resolve all `$ref` before processing.
-- Need to be `true` if circular references exist between components.
+- Resolve all `$ref` .
+- Must be `true` if circular references exist between components.
 - Default: `false`
 
 #### exportName
 
-Set variable name for export.
+Set the variable name for export.
 
 - Default: `schemas`
 
@@ -104,8 +104,8 @@ const Comp1 = z.any();
 const Comp2 = z.any();
 const Comp3 = z.any();
 
-export schemas = { Comp1, Comp2, Comp3 };
-//        ^-- This
+export const schemas = { Comp1, Comp2, Comp3 };
+//              ^-- This
 ```
 
 #### individually
@@ -124,7 +124,7 @@ export const Comp3 = z.any();
 
 #### eslintDisable
 
-Add `/* eslint-disable */` to first line.
+Add `/* eslint-disable */` to the first line.
 
 - Default: `false`
 
@@ -139,7 +139,7 @@ const Comp = z.any();
 
 Insert comma-separated rules after `eslint-disable` .
 
-- Only works with `eslintDisable: true`
+- Works only with `eslintDisable: true`
 - Default: `[]`
 
 ```js
@@ -153,14 +153,14 @@ const Comp = z.any();
 
 #### withoutImport
 
-Disable to output import statement.
+Disable to output the import statement.
 
 - Remove `import { z } from 'zod';`
 - Default: `false`
 
 #### withoutExport
 
-Disable to output export statement.
+Disable to output the export statement.
 
 - Remove `export const <exportName> { ... };`
 - Default: `false`
@@ -170,14 +170,14 @@ Disable to output export statement.
 Inherit Prettier settings from the project or configure it manually.
 
 - By default, Prettier runs with default settings.
-- If set to `true` , Prettier find config file from the project directory.
+- If set to `true` , Prettier will find the config file from the project directory.
     - Use [prettier.resolveConfigFile()](https://prettier.io/docs/en/api.html#prettierresolveconfigfilefilepath) with `process.cwd()` .
-- Can pass Prettier Configuration Schema as an `object` .
+- Can pass Prettier settings as an `object` .
 - Default: `false`
 
 #### disableFormat
 
-Disable formatting for output.
+Disable output formatting.
 
 - By default, the output is formatted by Prettier.
 - Default: `false`
@@ -203,15 +203,15 @@ Wrap regex with `^` and `$` .
 ```js
 // OAS
 {
-  type: string
+  type: 'string',
   pattern: '[a-z]+'
 }
 
 // withAnchors: false
-z.string().regex(new RegExp("[a-z]+")
+z.string().regex(new RegExp("[a-z]+"))
 
 // withAnchors: true
-z.string().regex(new RegExp("^[a-z]+$")
+z.string().regex(new RegExp("^[a-z]+$"))
 ```
 
 #### disableAutocomplete
@@ -223,14 +223,14 @@ Disable autocomplete for objects with missing `type: 'object'` .
 
 #### template
 
-Use a user-specific [EJS](https://ejs.co/) template.
+Use a custom [EJS](https://ejs.co/) template.
 
-- Sets the path to the template file.
+- Specifies the path to the template file.
 - Default: [default.ts.ejs](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/default.ts.ejs)
 
 #### parsers
 
-Select the preset or assign the user-specific parser.
+Select the preset or assign the custom parser.
 
 ```ts
 interface SchemaParsers {
@@ -262,7 +262,7 @@ const options = {
 
 ```ts
 type StringPreset =
-  // Change the processing order of keywords insert after `.string()`
+  // Change the processing order of keywords inserted after `.string()`
   | 'minmax-regex-format'
   | 'minmax-format-regex'
   | 'regex-format-minmax'
@@ -271,10 +271,10 @@ type StringPreset =
   | 'format-regex-minmax'
 ```
 
-##### User-specific parser
+##### Custom parser
 
 See [default parsers](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod/src/parsers) and [type definitions](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts).  
-Complex processing is possible when combined with a user-specific template.
+Complex processing is possible when combined with a custom template.
 
 ## CLI
 
