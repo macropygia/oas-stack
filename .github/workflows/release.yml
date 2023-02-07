@@ -91,5 +91,5 @@ jobs:
         with:
           flags: ${{ steps.jq.outputs.CODECOV_FLAGS }}
           files: ${{ steps.jq.outputs.CODECOV_FILES }}
-          verbose: true
-          dry_run: true
+          # verbose: true
+          # dry_run: true
