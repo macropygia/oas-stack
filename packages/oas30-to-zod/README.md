@@ -78,9 +78,10 @@ console.log(zodSchemasString);
 
 #### output
 
-The output path for the `.ts` file.
+Output for the file.
 
-- If set to `false`, returns string.
+- Specifies the path to the output file.
+- If set to `false`, returns a string.
 - Default: `false`
 
 #### dereference
