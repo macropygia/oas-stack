@@ -323,3 +323,5 @@ $ oas30-to-zod oas_document.yml # --> output `oas_document.ts`
     - 例
         - `--disable-rules no-control-regex`
         - `--disable-rules "no-control-regex, import/no-named-export"`
+- `--inherit-prettier`
+    - 有効・無効のみ設定可能

@@ -26,6 +26,12 @@ import {
   isReference,
 } from './typeCheck.js'
 
+/**
+ * Parse OAS schema to Zod schema
+ * @param schema - OAS Schema
+ * @param ctx - Context
+ * @returns Zod schemas (string)
+ */
 export const parseByType = (schema: MixedObject, ctx: ParseContext): string => {
   // Reference
   if (isReference(schema)) return parseReference(schema, ctx) // keyword

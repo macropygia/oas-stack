@@ -7,7 +7,7 @@
 [![Vitest](https://img.shields.io/badge/Vitest-6e9e18?style=flat-square&logo=Vitest&logoColor=white)](https://vitest.dev/)
 [![ESLint](https://img.shields.io/badge/ESLint-4b32c3?style=flat-square&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Prettier](https://img.shields.io/badge/Prettier-f7b93e?style=flat-square&logo=prettier&logoColor=white)](https://prettier.io/)
-[![VSCode](https://img.shields.io/badge/VSCode-007acc?style=flat-square&logo=visualstudiocode&logoColor=white)](https://code.visualstudio.com/)
+[![EditorConfig](https://img.shields.io/badge/EditorConfig-fefefe?style=flat-square&logo=editorconfig&logoColor=black)](https://editorconfig.org/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088ff?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 OpenAPI Specification関連の小物類

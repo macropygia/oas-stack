@@ -5,58 +5,103 @@ import type {
   SchemaType,
 } from '../../types/index.js'
 
-// primitives
+/**
+ * string, number, integer, boolean
+ * @param schema - OAS Schema
+ * @param type - Type
+ * @returns boolean
+ */
 export const isPrimitive = <
   T extends 'string' | 'number' | 'integer' | 'boolean'
 >(
-  x: SchemaObject,
-  p: T
-): x is SchemaObject & { type: T } => x.type === p
+  schema: SchemaObject,
+  type: T
+): schema is SchemaObject & { type: T } => schema.type === type
 
-// object
+/**
+ * object
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isObject = (
-  x: SchemaObject
-): x is SchemaObject & { type: 'object' } => x.type === 'object'
+  schema: SchemaObject
+): schema is SchemaObject & { type: 'object' } => schema.type === 'object'
 
-// array
+/**
+ * array
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isArray = (
-  x: SchemaObject
-): x is SchemaObject & { type: 'array' } => x.type === 'array'
+  schema: SchemaObject
+): schema is SchemaObject & { type: 'array' } => schema.type === 'array'
 
-// enum
+/**
+ * enum
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isEnum = (
-  x: SchemaObject
-): x is SchemaObject & { enum: SchemaType[] } =>
-  'enum' in x && x.enum !== undefined
+  schema: SchemaObject
+): schema is SchemaObject & { enum: SchemaType[] } =>
+  'enum' in schema && schema.enum !== undefined
 
-// allOf, anyOf, oneOf, not
+/**
+ * allOf
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isAllOf = (
-  x: SchemaObject
-): x is SchemaObject & { allOf: MixedObject[] } =>
-  'allOf' in x && x.allOf !== undefined
+  schema: SchemaObject
+): schema is SchemaObject & { allOf: MixedObject[] } =>
+  'allOf' in schema && schema.allOf !== undefined
 
+/**
+ * anyOf
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isAnyOf = (
-  x: SchemaObject
-): x is SchemaObject & { anyOf: MixedObject[] } =>
-  'anyOf' in x && x.anyOf !== undefined
+  schema: SchemaObject
+): schema is SchemaObject & { anyOf: MixedObject[] } =>
+  'anyOf' in schema && schema.anyOf !== undefined
 
+/**
+ * oneOf
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isOneOf = (
-  x: SchemaObject
-): x is SchemaObject & { oneOf: MixedObject[] } =>
-  'oneOf' in x && x.oneOf !== undefined
+  schema: SchemaObject
+): schema is SchemaObject & { oneOf: MixedObject[] } =>
+  'oneOf' in schema && schema.oneOf !== undefined
 
+/**
+ * not
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isNot = (
-  x: SchemaObject
-): x is SchemaObject & { not: MixedObject } => 'not' in x && x.not !== undefined
+  schema: SchemaObject
+): schema is SchemaObject & { not: MixedObject } =>
+  'not' in schema && schema.not !== undefined
 
-// $ref
+/**
+ * $ref
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isReference = (
-  x: MixedObject
-): x is ReferenceObject & { $ref: string } =>
-  '$ref' in x && x.$ref !== undefined
+  schema: MixedObject
+): schema is ReferenceObject & { $ref: string } =>
+  '$ref' in schema && schema.$ref !== undefined
 
-// nullable (3.0 only)
+/**
+ * nullable
+ * @param schema - OAS Schema
+ * @returns boolean
+ */
 export const isNullable = (
-  x: SchemaObject
-): x is SchemaObject & { nullable: true } =>
-  (x as SchemaObject).nullable === true
+  schema: SchemaObject
+): schema is SchemaObject & { nullable: true } =>
+  (schema as SchemaObject).nullable === true
