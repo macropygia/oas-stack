@@ -1,0 +1,94 @@
+name: '[oas30-to-zod] Bug report'
+# title:
+description: Bug report for oas30-to-zod
+labels:
+  - bug
+  - 'package: oas30-to-zod'
+# assignees:
+#   - macropygia
+body:
+  - type: input
+    id: version
+    attributes:
+      label: What version of `oas30-to-zod` are you using?
+      placeholder: 0.0.5
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: What version of Node.js are you using?
+      placeholder: 18.12.0
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: CommonJS or ES Modules
+      description: In which mode did the problem occur?
+      multiple: false
+      options:
+        - Only ES Modules
+        - Only CommonJS
+        - At least ES Modules
+        - At least CommonJS
+        - Both
+        - Other/Unknown
+    validations:
+      required: true
+  - type: checkboxes
+    id: category
+    attributes:
+      label: Category
+      description: You may select more than one.
+      options:
+        - label: Parser
+        - label: Template
+        - label: CLI
+        - label: Other/Unknown
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: settings
+    attributes:
+      label: Conditions
+      description: API Options, CLI flags, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: Minimal JSON/YAML/Object required for reproduction.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: Zod schemas
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+  - type: checkboxes
+    id: will-pr
+    attributes:
+      label: Participation
+      options:
+        - label: I am willing to create a pull request for this issue.

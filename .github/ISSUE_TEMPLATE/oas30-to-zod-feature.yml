@@ -1,0 +1,44 @@
+name: '[oas30-to-zod] Feature request'
+# title:
+description: Suggest an idea for oas30-to-zod
+labels:
+  - enhancement
+  - 'package: oas30-to-zod'
+# assignees:
+#   - macropygia
+body:
+  - type: checkboxes
+    id: category
+    attributes:
+      label: Category
+      description: You may select more than one.
+      options:
+        - label: Parser
+        - label: Template
+        - label: CLI
+        - label: Other
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the request.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Do all of the following conditions apply?
+      options:
+        - label: Pre-processing with swagger-parser, etc. is not a solution.
+          required: true
+        - label: Custom parser is not a solution.
+          required: true
+        - label: Custom template is not a solution.
+          required: true
+  - type: checkboxes
+    id: will-pr
+    attributes:
+      label: Participation
+      options:
+        - label: I am willing to create a pull request for this issue.
