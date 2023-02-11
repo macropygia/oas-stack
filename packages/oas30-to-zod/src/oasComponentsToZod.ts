@@ -7,17 +7,17 @@ import SwaggerParser from '@apidevtools/swagger-parser'
 import { red } from 'ansis/colors'
 import type { OpenAPI, OpenAPIV3 } from 'openapi-types'
 
-import { defaultParseOptions, parseSchema } from './parseSchema.js'
+import { defaultParseOptions, parseSchema } from '@/parseSchema.js'
 import type {
   Document,
   ComponentGraph,
   Options,
   ComponentName,
-} from './types/index.js'
-import { format } from './utils/format.js'
-import { generatePrintingOrder } from './utils/generatePrintingOrder.js'
-import { autocompleteObject } from './utils/autocompleteObject.js'
-import { isV3, isValidDoc } from './utils/validateDoc.js'
+} from '@/types/index.js'
+import { format } from '@/utils/format.js'
+import { generatePrintingOrder } from '@/utils/generatePrintingOrder.js'
+import { autocompleteObject } from '@/utils/autocompleteObject.js'
+import { isV3, isValidDoc } from '@/utils/validateDoc.js'
 
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)

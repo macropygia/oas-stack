@@ -4,7 +4,7 @@ import type { AllOfParser, MixedObject, ParseContext } from '../types/index.js'
 import { half } from '../utils/half.js'
 import { parseSchema } from '../parseSchema.js'
 
-import { getComponentNameFromRef } from './utils/getComponentNameFromRef.js'
+import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
 
 export const parseAllOf: AllOfParser = (schema, ctx) => {
   if (typeof ctx.parsers?.allOfParser === 'function')

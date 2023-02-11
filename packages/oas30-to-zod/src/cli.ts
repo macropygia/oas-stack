@@ -4,8 +4,8 @@ import path from 'node:path'
 import cac from 'cac' // eslint-disable-line import/no-named-as-default
 import { cyan, green } from 'ansis/colors'
 
-import { oasComponentsToZod } from './oasComponentsToZod.js'
-import type { CliOptions } from './types/index.js'
+import { oasComponentsToZod } from '@/oasComponentsToZod.js'
+import type { CliOptions } from '@/types/index.js'
 
 const cli = cac('oas30-to-zod')
 

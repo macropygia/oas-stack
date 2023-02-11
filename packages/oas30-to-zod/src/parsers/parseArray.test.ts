@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 
 import type { ArraySchemaObject } from '../types/index.js'
-import { minimumContext as ctx } from '../../__tests__/const.js'
+import { minimumContext as ctx } from '@tests/const.js'
 
 import { parseArray } from './parseArray.js'
 

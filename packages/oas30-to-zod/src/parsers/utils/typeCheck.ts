@@ -3,7 +3,7 @@ import type {
   ReferenceObject,
   SchemaObject,
   SchemaType,
-} from '../../types/index.js'
+} from '@/types/index.js'
 
 /**
  * string, number, integer, boolean

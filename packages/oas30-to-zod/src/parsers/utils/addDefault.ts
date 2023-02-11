@@ -1,4 +1,4 @@
-import type { MixedObject } from '../../types/index.js'
+import type { MixedObject } from '@/types/index.js'
 
 /**
  * Add `.default()` to Zod schema when needed

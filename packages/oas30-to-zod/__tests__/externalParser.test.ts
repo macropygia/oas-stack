@@ -1,20 +1,20 @@
 import { describe, test, expect } from 'vitest'
 
-import { parseAllOf } from '../src/parsers/parseAllOf.js'
-import { parseAnyOf } from '../src/parsers/parseAnyOf.js'
-import { parseArray } from '../src/parsers/parseArray.js'
-import { parseBoolean } from '../src/parsers/parseBoolean.js'
-import { parseDefault } from '../src/parsers/parseDefault.js'
-import { parseEnum } from '../src/parsers/parseEnum.js'
-import { parseNot } from '../src/parsers/parseNot.js'
-import { parseNullable } from '../src/parsers/parseNullable.js'
-import { parseNumber } from '../src/parsers/parseNumber.js'
-import { parseObject } from '../src/parsers/parseObject.js'
-import { parseOneOf } from '../src/parsers/parseOneOf.js'
-import { parseReference } from '../src/parsers/parseReference.js'
-import { parseString } from '../src/parsers/parseString.js'
-
 import { minimumContext as ctx } from './const.js'
+
+import { parseAllOf } from '@/parsers/parseAllOf.js'
+import { parseAnyOf } from '@/parsers/parseAnyOf.js'
+import { parseArray } from '@/parsers/parseArray.js'
+import { parseBoolean } from '@/parsers/parseBoolean.js'
+import { parseDefault } from '@/parsers/parseDefault.js'
+import { parseEnum } from '@/parsers/parseEnum.js'
+import { parseNot } from '@/parsers/parseNot.js'
+import { parseNullable } from '@/parsers/parseNullable.js'
+import { parseNumber } from '@/parsers/parseNumber.js'
+import { parseObject } from '@/parsers/parseObject.js'
+import { parseOneOf } from '@/parsers/parseOneOf.js'
+import { parseReference } from '@/parsers/parseReference.js'
+import { parseString } from '@/parsers/parseString.js'
 
 /* @ts-ignore */
 const dummyParser = (schema: any, ctx: any) => 'dummy' // eslint-disable-line

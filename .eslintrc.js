@@ -24,7 +24,7 @@ module.exports = defineConfig({
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
-        project: 'packages/*/tsconfig.json',
+        project: ['packages/oas30-to-zod/tsconfig.json'],
       },
     },
   },
@@ -38,7 +38,7 @@ module.exports = defineConfig({
     // eslint-import-resolver-typescript
     'import/no-unresolved': 'error', // Enable main feature
     // eslint-plugin-n
-    // 'n/no-missing-import': 'off', // Conflict typescript path alias
+    'n/no-missing-import': 'off', // Conflict typescript path alias
     // eslint-plugin-tsdoc
     'tsdoc/syntax': 'warn', // Required to use autofix
 

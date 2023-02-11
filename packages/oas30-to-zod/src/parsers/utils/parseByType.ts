@@ -1,4 +1,3 @@
-import type { MixedObject, ParseContext } from '../../types/index.js'
 import { parseAllOf } from '../parseAllOf.js'
 import { parseAnyOf } from '../parseAnyOf.js'
 import { parseArray } from '../parseArray.js'
@@ -13,6 +12,7 @@ import { parseOneOf } from '../parseOneOf.js'
 import { parseReference } from '../parseReference.js'
 import { parseString } from '../parseString.js'
 
+import type { MixedObject, ParseContext } from '@/types/index.js'
 import {
   isAllOf,
   isAnyOf,
@@ -24,7 +24,7 @@ import {
   isOneOf,
   isPrimitive,
   isReference,
-} from './typeCheck.js'
+} from '@/parsers/utils/typeCheck.js'
 
 /**
  * Parse OAS schema to Zod schema

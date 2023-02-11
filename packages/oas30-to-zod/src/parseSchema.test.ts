@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 
 import { minimumContext as ctx } from '../__tests__/const.js'
 
-import { parseSchema } from './parseSchema.js'
+import { parseSchema } from '@/parseSchema.js'
 
 ctx.options = {
   withDesc: true,

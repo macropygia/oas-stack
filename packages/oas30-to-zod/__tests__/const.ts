@@ -1,4 +1,4 @@
-import type { ParseContext } from '../src/types/index.js'
+import type { ParseContext } from '@/types/index.js'
 
 export const minimumContext: ParseContext = {
   options: {},

@@ -1,9 +1,9 @@
 import { magenta } from 'ansis/colors'
 
-import type { MixedObject, ParseContext, ParseOptions } from './types/index.js'
-import { addDefault } from './parsers/utils/addDefault.js'
-import { addDesc } from './parsers/utils/addDesc.js'
-import { parseByType } from './parsers/utils/parseByType.js'
+import type { MixedObject, ParseContext, ParseOptions } from '@/types/index.js'
+import { addDefault } from '@/parsers/utils/addDefault.js'
+import { addDesc } from '@/parsers/utils/addDesc.js'
+import { parseByType } from '@/parsers/utils/parseByType.js'
 
 const defaultParseOptions: ParseOptions = {
   withoutDefaults: false,

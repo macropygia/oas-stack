@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { oasComponentsToZod } from '../src/oasComponentsToZod.js'
+import { oasComponentsToZod } from '@/oasComponentsToZod.js'
 
 describe('oasComponentsToZod (rejects)', () => {
   test('Invalid output', async () => {

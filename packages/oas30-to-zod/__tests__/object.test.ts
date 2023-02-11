@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { oasComponentsToZod } from '../src/oasComponentsToZod.js'
+import { oasComponentsToZod } from '@/oasComponentsToZod.js'
 
 describe('oasComponentsToZod (object)', async () => {
   test('Enable object autocomplete', async () => {
