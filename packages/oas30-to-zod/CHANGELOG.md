@@ -1,5 +1,12 @@
 # oas30-to-zod
 
+## 0.0.7
+
+### Patch Changes
+
+- 1d60953: Add supported keywords for `format`
+- ff5eae5: Fix to `.optional()` was not added correctly
+
 ## 0.0.6
 
 ### Patch Changes
