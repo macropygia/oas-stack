@@ -1,12 +1,9 @@
 import { describe, test, expect } from 'vitest'
 
-import type { ArraySchemaObject, ParseContext } from '../types/index.js'
+import type { ArraySchemaObject } from '../types/index.js'
+import { minimumContext as ctx } from '../../__tests__/const.js'
 
 import { parseArray } from './parseArray.js'
-
-const ctx: ParseContext = {
-  options: {},
-}
 
 describe('parseArray', () => {
   test('Array without items', () => {

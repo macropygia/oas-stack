@@ -53,16 +53,31 @@ export const oasComponentsToZod = async (
 
   if (!options.disableAutocomplete) autocompleteObject(doc)
 
-  const compGraph: ComponentGraph = { deps: {}, isObject: {} }
+  const compGraph: ComponentGraph = {
+    deps: {},
+    isObject: {},
+    isNullable: {},
+    hasDefault: {},
+  }
 
   const dereferencedDoc = await SwaggerParser.dereference(
     JSON.parse(JSON.stringify(doc))
   ).then((deref) => {
     const resolvedSchemas = (deref as Document).components.schemas
     Object.entries(resolvedSchemas).forEach(([compName, compSchema]) => {
+      // Object
       if ('type' in compSchema && compSchema.type === 'object')
         compGraph.isObject[compName] = true
       else compGraph.isObject[compName] = false
+
+      // Nullable
+      if ('nullable' in compSchema && compSchema.nullable === true)
+        compGraph.isNullable[compName] = true
+      else compGraph.isNullable[compName] = false
+
+      // Default
+      if ('default' in compSchema) compGraph.hasDefault[compName] = true
+      else compGraph.hasDefault[compName] = false
     })
     return deref as Document
   })

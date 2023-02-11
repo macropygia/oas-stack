@@ -1,6 +1,5 @@
 import { describe, test, expect } from 'vitest'
 
-import type { ParseContext } from '../src/types/index.js'
 import { parseAllOf } from '../src/parsers/parseAllOf.js'
 import { parseAnyOf } from '../src/parsers/parseAnyOf.js'
 import { parseArray } from '../src/parsers/parseArray.js'
@@ -15,27 +14,25 @@ import { parseOneOf } from '../src/parsers/parseOneOf.js'
 import { parseReference } from '../src/parsers/parseReference.js'
 import { parseString } from '../src/parsers/parseString.js'
 
+import { minimumContext as ctx } from './const.js'
+
 /* @ts-ignore */
 const dummyParser = (schema: any, ctx: any) => 'dummy' // eslint-disable-line
 
-const ctx: ParseContext = {
-  options: {},
-  name: 'Component',
-  parsers: {
-    referenceParser: dummyParser,
-    nullableParser: dummyParser,
-    objectParser: dummyParser,
-    arrayParser: dummyParser,
-    anyOfParser: dummyParser,
-    allOfParser: dummyParser,
-    oneOfParser: dummyParser,
-    notParser: dummyParser,
-    enumParser: dummyParser,
-    stringParser: dummyParser,
-    numberParser: dummyParser,
-    booleanParser: dummyParser,
-    defaultParser: dummyParser,
-  },
+ctx.parsers = {
+  referenceParser: dummyParser,
+  nullableParser: dummyParser,
+  objectParser: dummyParser,
+  arrayParser: dummyParser,
+  anyOfParser: dummyParser,
+  allOfParser: dummyParser,
+  oneOfParser: dummyParser,
+  notParser: dummyParser,
+  enumParser: dummyParser,
+  stringParser: dummyParser,
+  numberParser: dummyParser,
+  booleanParser: dummyParser,
+  defaultParser: dummyParser,
 }
 
 describe('External Parser', () => {

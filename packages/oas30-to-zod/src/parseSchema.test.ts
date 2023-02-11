@@ -1,13 +1,11 @@
 import { describe, test, expect } from 'vitest'
 
-import { parseSchema } from './parseSchema.js'
-import type { ParseContext } from './types/index.js'
+import { minimumContext as ctx } from '../__tests__/const.js'
 
-const ctx: ParseContext = {
-  options: {
-    withDesc: true,
-  },
-  name: 'Component',
+import { parseSchema } from './parseSchema.js'
+
+ctx.options = {
+  withDesc: true,
 }
 
 describe('parseSchema', () => {

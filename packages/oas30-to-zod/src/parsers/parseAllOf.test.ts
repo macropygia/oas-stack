@@ -1,13 +1,8 @@
 import { describe, test, expect } from 'vitest'
 
-import type { ParseContext } from '../types/index.js'
+import { minimumContext as ctx } from '../../__tests__/const.js'
 
 import { parseAllOf } from './parseAllOf.js'
-
-const ctx: ParseContext = {
-  options: {},
-  name: 'Component',
-}
 
 describe('parseAllOf', () => {
   test('Multiple elements with internal reference', () => {

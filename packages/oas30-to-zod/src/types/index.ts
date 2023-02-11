@@ -118,22 +118,24 @@ export type ComponentName = string
 
 export type ComponentDeps = Record<ComponentName, ComponentName[]>
 
-export type ComponentIsObject = Record<ComponentName, boolean>
+export type ComponentFlag = Record<ComponentName, boolean>
 
 export interface ComponentGraph {
   deps: ComponentDeps
-  isObject: ComponentIsObject
+  isObject: ComponentFlag
+  isNullable: ComponentFlag
+  hasDefault: ComponentFlag
 }
 
 export interface ParseContext {
   options: ParseOptions
   parsers?: SchemaParsers | undefined
-  graph?: ComponentGraph
-  name?: ComponentName
-  deps?: ComponentName[]
+  graph: ComponentGraph
+  name: ComponentName
+  deps: ComponentName[]
   doc?: Document
   schemas?: MixedRecord
-  data?: Record<string, any>
+  data: Record<string, any>
 }
 
 // ---------------------------------------------------------

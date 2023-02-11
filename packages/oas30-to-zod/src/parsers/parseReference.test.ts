@@ -1,13 +1,8 @@
 import { describe, test, expect } from 'vitest'
 
-import type { ParseContext } from '../types/index.js'
+import { minimumContext as ctx } from '../../__tests__/const.js'
 
 import { parseReference } from './parseReference.js'
-
-const ctx: ParseContext = {
-  options: {},
-  name: 'Component',
-}
 
 describe('parseReference', () => {
   test('Internal reference', () => {
