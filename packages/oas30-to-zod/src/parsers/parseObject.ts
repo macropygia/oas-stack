@@ -57,6 +57,15 @@ const parseProperties = (
       ctx
     )}`
 
+    // Referenced component has `.default()`
+    if (
+      !ctx.options.withoutDefaults &&
+      !parsed.startsWith('z.') &&
+      parsed.includes(':') &&
+      ctx.graph.hasDefault[parsed.split(':')[1] as string] !== true
+    )
+      return parsed
+
     if (
       // No need to add `.optional()` if `.default()` exists
       (!ctx.options.withoutDefaults && 'default' in childSchema) ||
