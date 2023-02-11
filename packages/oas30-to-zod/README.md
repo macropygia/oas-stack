@@ -34,14 +34,15 @@ Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 componen
 
 ## Supported `format`
 
-Supported `format` in `string`.
-
-- `email` convert to `.email()`
-- `url` convert to `.url()`
-- `uuid` convert to `.uuid()`
-- `cuid` convert to `.cuid()`
-- `cuid2` convert to `.cuid2()`
-- `date-time` convert to `.datetime()`
+- `string`
+    - `email` convert to `.email()`
+    - `url` convert to `.url()`
+    - `uuid` convert to `.uuid()`
+    - `cuid` convert to `.cuid()`
+    - `cuid2` convert to `.cuid2()`
+    - `date-time` convert to `.datetime()`
+- `number`
+    - `int32` , `int64` convert to `.int()`
 
 See [Zod document](https://github.com/colinhacks/zod#strings) for details.
 

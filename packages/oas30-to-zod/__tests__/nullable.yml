@@ -1,0 +1,14 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: nullable
+paths:
+components:
+  schemas:
+    Nullable:
+      type: string
+      nullable: true
+    NullableWithDefault:
+      type: string
+      nullable: true
+      default: alpha

@@ -1,14 +1,14 @@
 import { red } from 'ansis/colors'
 import type { OpenAPIV3 } from 'openapi-types'
 
+import { parseSchema } from '@/parseSchema.js'
 import type {
   NonArraySchemaObject,
   ObjectParser,
   ParseContext,
   ReferenceObject,
   SchemaObject,
-} from '../types/index.js'
-import { parseSchema } from '../parseSchema.js'
+} from '@/types/index.js'
 
 export const parseObject: ObjectParser = (schema, ctx) => {
   if (typeof ctx.parsers?.objectParser === 'function')
@@ -52,19 +52,17 @@ const parseProperties = (
   ctx: ParseContext
 ) =>
   Object.entries(schema.properties ?? {}).map(([childName, childSchema]) => {
-    const parsed = `${JSON.stringify(childName)}:${parseSchema(
-      childSchema,
-      ctx
-    )}`
+    const parsedChild = parseSchema(childSchema, ctx)
+    const parsed = `${JSON.stringify(childName)}:${parsedChild}`
 
     // Referenced component has `.default()`
     if (
       !ctx.options.withoutDefaults &&
-      !parsed.startsWith('z.') &&
-      parsed.includes(':') &&
-      ctx.graph.hasDefault[parsed.split(':')[1] as string] !== true
-    )
+      !parsedChild.startsWith('z.') &&
+      ctx.graph.hasDefault[parsedChild] === true
+    ) {
       return parsed
+    }
 
     if (
       // No need to add `.optional()` if `.default()` exists

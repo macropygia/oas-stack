@@ -36,6 +36,7 @@
   },
   "scripts": {
     "dev": "vitest",
+    "dev:coverage": "vitest --coverage",
     "clean": "rimraf ./dist",
     "type-check": "tsc --noEmit -p .",
     "test": "vitest run",

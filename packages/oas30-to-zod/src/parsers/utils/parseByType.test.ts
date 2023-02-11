@@ -1,8 +1,7 @@
 import { describe, test, expect } from 'vitest'
 
-import { minimumContext as ctx } from '../../../__tests__/const.js'
-
-import { parseByType } from './parseByType.js'
+import { emptyContext as ctx } from '@tests/const.js'
+import { parseByType } from '@/parsers/utils/parseByType.js'
 
 describe('parseByType', () => {
   test('Reference', () => {
@@ -61,7 +60,9 @@ describe('parseByType', () => {
   })
 
   test('Enum', () => {
-    expect(parseByType({ enum: [] }, ctx)).toMatchInlineSnapshot('"z.enum([])"')
+    expect(parseByType({ enum: [] }, ctx)).toMatchInlineSnapshot(
+      '"z.union([])"'
+    )
   })
 
   test('String', () => {

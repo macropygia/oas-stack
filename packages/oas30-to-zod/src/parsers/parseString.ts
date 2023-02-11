@@ -1,9 +1,5 @@
-import type {
-  ParseContext,
-  SchemaObject,
-  StringParser,
-} from '../types/index.js'
-import { escapeControlCharacters } from '../utils/escapeControlCharacters.js'
+import { escapeControlCharacters } from '@/utils/escapeControlCharacters.js'
+import type { ParseContext, SchemaObject, StringParser } from '@/types/index.js'
 
 type KeywordTyps = 'minmax' | 'regex' | 'format'
 

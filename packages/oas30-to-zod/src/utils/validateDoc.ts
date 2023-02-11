@@ -1,6 +1,6 @@
 import type { OpenAPI, OpenAPIV3 } from 'openapi-types'
 
-import type { Document, ComponentsObject } from '../types/index.js'
+import type { Document, ComponentsObject } from '@/types/index.js'
 
 /**
  * Is the document version 3.0?

@@ -1,7 +1,7 @@
 import { red, yellow } from 'ansis/colors'
 
-import type { OneOfParser } from '../types/index.js'
-import { parseSchema } from '../parseSchema.js'
+import { parseSchema } from '@/parseSchema.js'
+import type { OneOfParser } from '@/types/index.js'
 
 export const parseOneOf: OneOfParser = (schema, ctx) => {
   if (typeof ctx.parsers?.oneOfParser === 'function')

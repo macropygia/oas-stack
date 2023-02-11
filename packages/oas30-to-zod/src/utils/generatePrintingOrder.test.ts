@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { generatePrintingOrder } from './generatePrintingOrder.js'
+import { generatePrintingOrder } from '@/utils/generatePrintingOrder.js'
 
 describe('generatePrintingOrder', () => {
   test('Default', () => {

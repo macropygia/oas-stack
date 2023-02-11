@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
 
-describe('oasComponentsToZod (rejects)', () => {
+describe('Throw', () => {
   test('Invalid output', async () => {
     await expect(() =>
       oasComponentsToZod('__tests__/minimum.yml', {

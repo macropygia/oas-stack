@@ -11,7 +11,7 @@ import {
   isOneOf,
   isPrimitive,
   isReference,
-} from './typeCheck.js'
+} from '@/parsers/utils/typeCheck.js'
 
 describe('typeCheck', () => {
   test('Reference', () => {

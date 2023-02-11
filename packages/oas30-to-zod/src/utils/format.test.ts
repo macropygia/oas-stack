@@ -1,7 +1,7 @@
 import fse from 'fs-extra'
 import { describe, test, expect } from 'vitest'
 
-import { format, getPrettierOptions } from './format.js'
+import { format, getPrettierOptions } from '@/utils/format.js'
 
 describe('format', () => {
   test('Default', () => {

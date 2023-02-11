@@ -1,6 +1,6 @@
 import { magenta } from 'ansis/colors'
 
-import type { NotParser } from '../types/index.js'
+import type { NotParser } from '@/types/index.js'
 
 export const parseNot: NotParser = (schema, ctx) => {
   if (typeof ctx.parsers?.notParser === 'function')

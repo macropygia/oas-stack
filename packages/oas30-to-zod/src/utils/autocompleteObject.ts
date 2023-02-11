@@ -1,4 +1,4 @@
-import type { Document } from '../types/index.js'
+import type { Document } from '@/types/index.js'
 
 /**
  * Add `type: 'object'` to the schema that has only `properties` or `additionalProperties` .

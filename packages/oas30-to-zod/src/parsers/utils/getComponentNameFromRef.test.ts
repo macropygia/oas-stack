@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { getComponentNameFromRef } from './getComponentNameFromRef.js'
+import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
 
 describe('getComponentNameFromRef', () => {
   test('`description` exists', () => {

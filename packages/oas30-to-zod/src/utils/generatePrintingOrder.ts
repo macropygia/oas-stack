@@ -1,4 +1,4 @@
-import type { ComponentDeps, ComponentName } from '../types/index.js'
+import type { ComponentDeps, ComponentName } from '@/types/index.js'
 
 /**
  * Generate printing order based on dependencies.

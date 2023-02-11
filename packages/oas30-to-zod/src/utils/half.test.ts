@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { half } from './half.js'
+import { half } from '@/utils/half.js'
 
 describe('half', () => {
   test('Default', () => {

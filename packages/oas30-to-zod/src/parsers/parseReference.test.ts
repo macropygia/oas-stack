@@ -1,8 +1,7 @@
 import { describe, test, expect } from 'vitest'
 
-import { parseReference } from './parseReference.js'
-
-import { minimumContext as ctx } from '@tests/const.js'
+import { parseReference } from '@/parsers/parseReference.js'
+import { emptyContext as ctx } from '@tests/const.js'
 
 describe('parseReference', () => {
   test('Internal reference', () => {

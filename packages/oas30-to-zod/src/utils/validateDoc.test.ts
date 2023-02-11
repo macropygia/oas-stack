@@ -1,6 +1,11 @@
 import { describe, test, expect } from 'vitest'
 
-import { isV3, hasComponents, hasSchemas, isValidDoc } from './validateDoc.js'
+import {
+  isV3,
+  hasComponents,
+  hasSchemas,
+  isValidDoc,
+} from '@/utils/validateDoc.js'
 
 const minimumDoc = {
   openapi: '3.0.0',

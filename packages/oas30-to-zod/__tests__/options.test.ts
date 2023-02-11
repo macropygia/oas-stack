@@ -2,25 +2,24 @@ import fse from 'fs-extra'
 import { describe, test, expect } from 'vitest'
 
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
+import { minimumOutput } from '@tests/const.js'
 
-const minimumOutput = {
-  withoutImport: true,
-  withoutExport: true,
-}
-
-describe('oasComponentsToZod (basic)', async () => {
-  test('Default', async () => {
-    await expect(
-      oasComponentsToZod('__tests__/basic.yml')
-    ).resolves.toMatchSnapshot()
-  })
-
+describe('Options', async () => {
   test('Disable format', async () => {
     await expect(
-      oasComponentsToZod('__tests__/basic.yml', {
+      oasComponentsToZod('__tests__/minimum.yml', {
         disableFormat: true,
       })
-    ).resolves.toMatchSnapshot()
+    ).resolves.toMatchInlineSnapshot(`
+      "import { z } from 'zod';
+
+      const Minimum = z.string();
+
+      export const schemas = {
+        Minimum
+      };
+      "
+    `)
   })
 
   test('Enable output', async () => {
@@ -144,42 +143,6 @@ describe('oasComponentsToZod (basic)', async () => {
         .max(10)
         .regex(new RegExp("[a-z]+"))
         .describe("bar")
-        .default("foo");
-      "
-    `)
-  })
-
-  test('Complex regex', async () => {
-    await expect(
-      oasComponentsToZod('__tests__/regex.yml', {
-        ...minimumOutput,
-      })
-    ).resolves.toMatchSnapshot()
-  })
-
-  test('Wrap regex with anchors', async () => {
-    await expect(
-      oasComponentsToZod('__tests__/regex.yml', {
-        ...minimumOutput,
-        withAnchors: true,
-      })
-    ).resolves.toMatchSnapshot()
-  })
-
-  test('Use preset', async () => {
-    await expect(
-      oasComponentsToZod('__tests__/string.yml', {
-        ...minimumOutput,
-        parsers: {
-          stringParser: 'format-regex-minmax',
-        },
-      })
-    ).resolves.toMatchInlineSnapshot(`
-      "const Minimum = z
-        .string()
-        .regex(new RegExp("[a-z]+"))
-        .min(1)
-        .max(10)
         .default("foo");
       "
     `)

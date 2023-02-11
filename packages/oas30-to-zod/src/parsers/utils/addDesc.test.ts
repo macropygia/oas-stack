@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { addDesc } from './addDesc.js'
+import { addDesc } from '@/parsers/utils/addDesc.js'
 
 describe('addDesc', () => {
   test('`description` exists', () => {

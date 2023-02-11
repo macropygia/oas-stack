@@ -33,14 +33,15 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
 
 ## 対応 `format`
 
-対応する `string` 型の `format`
-
-- `email` -> `.email()`
-- `url` -> `.url()`
-- `uuid` -> `.uuid()`
-- `cuid` -> `.cuid()`
-- `cuid2` -> `.cuid2()`
-- `date-time` -> `.datetime()`
+- `string`
+    - `email` -> `.email()`
+    - `url` -> `.url()`
+    - `uuid` -> `.uuid()`
+    - `cuid` -> `.cuid()`
+    - `cuid2` -> `.cuid2()`
+    - `date-time` -> `.datetime()`
+- `number`
+    - `int32` , `int64` -> `.int()`
 
 詳細は[Zodのドキュメント](https://github.com/colinhacks/zod#strings)を参照のこと。
 

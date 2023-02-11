@@ -1,7 +1,7 @@
 import { red, yellow } from 'ansis/colors'
 
-import type { AnyOfParser } from '../types/index.js'
-import { parseSchema } from '../parseSchema.js'
+import { parseSchema } from '@/parseSchema.js'
+import type { AnyOfParser } from '@/types/index.js'
 
 export const parseAnyOf: AnyOfParser = (schema, ctx) => {
   if (typeof ctx.parsers?.anyOfParser === 'function')

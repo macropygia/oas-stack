@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { addDefault } from './addDefault.js'
+import { addDefault } from '@/parsers/utils/addDefault.js'
 
 describe('addDefault', () => {
   test('`default` exists', () => {

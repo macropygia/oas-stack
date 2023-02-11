@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 
-import { escapeControlCharacters } from './escapeControlCharacters.js'
+import { escapeControlCharacters } from '@/utils/escapeControlCharacters.js'
 
 describe('escapeControlCharacters', () => {
   test('Default', () => {

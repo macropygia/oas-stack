@@ -1,0 +1,13 @@
+// Vitest Snapshot v1
+
+exports[`Options > Enable dereference 1`] = `
+"const Comp1 = z.object({
+  Prop1: z.string().optional(),
+  Prop2: z.number().optional(),
+});
+const Comp2 = z.object({
+  Prop1: z.string().optional(),
+  Prop2: z.number().optional(),
+});
+"
+`;

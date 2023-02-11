@@ -1,5 +1,5 @@
-import type { ArrayParser } from '../types/index.js'
-import { parseSchema } from '../parseSchema.js'
+import { parseSchema } from '@/parseSchema.js'
+import type { ArrayParser } from '@/types/index.js'
 
 export const parseArray: ArrayParser = (schema, ctx) => {
   if (typeof ctx.parsers?.arrayParser === 'function')

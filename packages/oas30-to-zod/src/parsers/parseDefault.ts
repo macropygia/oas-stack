@@ -1,6 +1,6 @@
 import { magenta } from 'ansis/colors'
 
-import type { DefaultParser } from '../types/index.js'
+import type { DefaultParser } from '@/types/index.js'
 
 export const parseDefault: DefaultParser = (schema, ctx) => {
   if (typeof ctx.parsers?.defaultParser === 'function')
