@@ -20,6 +20,9 @@ const StringDesc = z.string();
 const StringMail = z.string().email();
 const StringUrl = z.string().url();
 const StringUuid = z.string().uuid();
+const StringCuid = z.string().cuid();
+const StringCuid2 = z.string().cuid2();
+const StringDatetime = z.string().datetime();
 const StringRange = z.string().min(10).max(20);
 const StringPattern = z.string().regex(new RegExp("[a-z]+"));
 const PrimitiveNumber = z.number();
@@ -84,6 +87,9 @@ export const schemas = {
   StringMail,
   StringUrl,
   StringUuid,
+  StringCuid,
+  StringCuid2,
+  StringDatetime,
   StringRange,
   StringPattern,
   PrimitiveNumber,
@@ -130,6 +136,9 @@ const StringDesc = z.string();
 const StringMail = z.string().email();
 const StringUrl = z.string().url();
 const StringUuid = z.string().uuid();
+const StringCuid = z.string().cuid();
+const StringCuid2 = z.string().cuid2();
+const StringDatetime = z.string().datetime();
 const StringRange = z.string().min(10).max(20);
 const StringPattern = z.string().regex(new RegExp("[a-z]+"));
 const PrimitiveNumber = z.number();
@@ -171,6 +180,9 @@ export const schemas = {
   StringMail,
   StringUrl,
   StringUuid,
+  StringCuid,
+  StringCuid2,
+  StringDatetime,
   StringRange,
   StringPattern,
   PrimitiveNumber,

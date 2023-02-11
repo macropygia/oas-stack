@@ -22,6 +22,15 @@ components:
     StringUuid:
       type: string
       format: uuid
+    StringCuid:
+      type: string
+      format: cuid
+    StringCuid2:
+      type: string
+      format: cuid2
+    StringDatetime:
+      type: string
+      format: date-time
     StringRange:
       type: string
       minLength: 10

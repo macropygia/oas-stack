@@ -13,7 +13,7 @@ Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 componen
     - Breaking changes may occur without any notice.
     - See [CHANGELOG](./CHANGELOG.md) for changes.
 - Available as API and CLI.
-- Dual package for CommonJS/ES modules.
+- Dual package for CommonJS/ES Modules.
 - Customizable.
     - Parsers are pluggable.
     - Can edit output with [EJS](https://ejs.co/).
@@ -31,6 +31,19 @@ Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 componen
     - `not`
     - `minProperties`
     - `maxProperties`
+
+## Supported `format`
+
+Supported `format` in `string`.
+
+- `email` convert to `.email()`
+- `url` convert to `.url()`
+- `uuid` convert to `.uuid()`
+- `cuid` convert to `.cuid()`
+- `cuid2` convert to `.cuid2()`
+- `date-time` convert to `.datetime()`
+
+See [Zod document](https://github.com/colinhacks/zod#strings) for details.
 
 ## API
 

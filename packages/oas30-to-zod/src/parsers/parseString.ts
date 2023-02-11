@@ -5,7 +5,7 @@ import type {
 } from '../types/index.js'
 import { escapeControlCharacters } from '../utils/escapeControlCharacters.js'
 
-type ParserType = 'minmax' | 'regex' | 'format'
+type KeywordTyps = 'minmax' | 'regex' | 'format'
 
 export const parseString: StringParser = (schema, ctx) => {
   if (typeof ctx.parsers?.stringParser === 'function')
@@ -19,12 +19,14 @@ export const parseString: StringParser = (schema, ctx) => {
 
   preset
     .split('-')
-    .forEach((type) => stringParser[type as ParserType](schema, ctx, fragments))
+    .forEach((keyword) =>
+      keywordParser[keyword as KeywordTyps](schema, ctx, fragments)
+    )
 
   return fragments.join('')
 }
 
-const stringParser = {
+const keywordParser = {
   minmax: (
     schema: SchemaObject & { type: 'string' },
     _ctx: ParseContext,
@@ -55,5 +57,8 @@ const stringParser = {
     if (schema.format === 'email') fragments.push('.email()')
     else if (schema.format === 'uri') fragments.push('.url()')
     else if (schema.format === 'uuid') fragments.push('.uuid()')
+    else if (schema.format === 'cuid') fragments.push('.cuid()')
+    else if (schema.format === 'cuid2') fragments.push('.cuid2()')
+    else if (schema.format === 'date-time') fragments.push('.datetime()')
   },
 }

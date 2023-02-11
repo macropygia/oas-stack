@@ -31,6 +31,19 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
     - `minProperties`
     - `maxProperties`
 
+## 対応 `format`
+
+対応する `string` 型の `format`
+
+- `email` -> `.email()`
+- `url` -> `.url()`
+- `uuid` -> `.uuid()`
+- `cuid` -> `.cuid()`
+- `cuid2` -> `.cuid2()`
+- `date-time` -> `.datetime()`
+
+詳細は[Zodのドキュメント](https://github.com/colinhacks/zod#strings)を参照のこと。
+
 ## API
 
 ```js
