@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.8
+
+### Patch Changes
+
+- 3184345: Add a feature to use schema parser alone
+
 ## 0.0.7
 
 ### Patch Changes
