@@ -11,7 +11,27 @@ const defaultParseOptions: ParseOptions = {
   withAnchors: false,
 }
 
-const parseSchema = (schema: MixedObject, ctx: ParseContext): string => {
+/**
+ * Parse schema object
+ * @param schema - Schema object
+ * @param partialContext - Context object
+ * @returns Parsed string
+ */
+const parseSchema = (
+  schema: MixedObject,
+  partialContext?: Partial<ParseContext>
+): string => {
+  const ctx: ParseContext = {
+    ...{
+      options: {},
+      graph: { deps: {}, isObject: {}, isNullable: {}, hasDefault: {} },
+      name: 'UnnamedSchema',
+      deps: [],
+      data: {},
+    },
+    ...partialContext,
+  }
+
   ctx.options = { ...defaultParseOptions, ...ctx.options }
   const { withoutDefaults, withDesc } = ctx.options
 
@@ -22,11 +42,11 @@ const parseSchema = (schema: MixedObject, ctx: ParseContext): string => {
 
   let parsed = parseByType(schema, ctx)
 
-  // Convert `schema.description` to `.describe()`
-  if (withDesc) parsed = addDesc(schema, parsed)
-
   // Convert `schema.default` to `.default()`
   if (!withoutDefaults) parsed = addDefault(schema, parsed)
+
+  // Convert `schema.description` to `.describe()`
+  if (withDesc) parsed = addDesc(schema, parsed)
 
   return parsed
 }

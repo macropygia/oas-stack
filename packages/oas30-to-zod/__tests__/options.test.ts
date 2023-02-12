@@ -142,8 +142,8 @@ describe('Options', async () => {
         .min(1)
         .max(10)
         .regex(new RegExp("[a-z]+"))
-        .describe("bar")
-        .default("foo");
+        .default("foo")
+        .describe("bar");
       "
     `)
   })

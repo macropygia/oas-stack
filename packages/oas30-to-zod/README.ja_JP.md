@@ -20,7 +20,9 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
     - [OpenAPI Specification 3.0.3](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
     - [Data Models (Schemas) - OpenAPI Guide](https://swagger.io/docs/specification/data-models/)
 
-## 制限事項
+## 仕様
+
+### 制限事項
 
 - 処理するドキュメントは外部への参照を持たず独立している必要がある
     - `$ref` は `#/components/schemas/<component_name>` の形式のみ有効
@@ -31,7 +33,7 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
     - `minProperties`
     - `maxProperties`
 
-## 対応 `format`
+### 対応する `format` の値
 
 - `string`
     - `email` -> `.email()`
@@ -47,14 +49,6 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
 
 ## API
 
-```js
-import { oasComponentsToZod } from 'oas30-to-zod';
-
-const zodSchemasString = await oasComponentsToZod('path/to/oas_document.yml');
-
-console.log(zodSchemasString);
-```
-
 ### oasComponentsToZod(input, options)
 
 | 引数      | 型                 | 既定値 | 必須 |
@@ -68,7 +62,16 @@ console.log(zodSchemasString);
 - `options`
     - 下記参照
 
-### オプション
+```js
+// e.g.
+import { oasComponentsToZod } from 'oas30-to-zod';
+
+const zodSchemasString = await oasComponentsToZod('path/to/oas_document.yml');
+
+console.log(zodSchemasString);
+```
+
+#### オプション一覧
 
 | 名前                  | 型                  | 既定値    | 必須 |
 | :-------------------- | :------------------ | :-------- | :--- |
@@ -291,6 +294,66 @@ type StringPreset =
 
 [標準パーサー](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod/src/parsers)と[型定義](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts)を参照のこと。  
 カスタムテンプレートと組み合わせることで複雑な処理も可能。
+
+### parseSchema(schema, context)
+
+パーサーを単独で使用する。  
+Zodスキーマの文字列（未フォーマット）を返す。
+
+| Parameter         | Type     | Default         | Required |
+| ----------------- | -------- | --------------- | -------- |
+| `schema`          | `object` |                 | Yes      |
+| `context`         | `object` |                 | No       |
+| `context.options` | `object` |                 | No       |
+| `context.parsers` | `object` |                 | No       |
+
+```ts
+// 例
+import { parseSchema } from 'oas30-to-zod';
+
+const parsed = parseSchema(
+  {
+    type: 'object',
+    required: ['Prop2'],
+    properties: {
+      Prop1: {
+        type: 'string',
+        pattern: '[a-z]+',
+        default: 'alpha',
+        description: 'beta',
+      },
+      Prop2: {
+        type: 'number',
+      },
+    },
+  },
+  {
+    options: { withAnchors: true, withDesc: true },
+    parsers: {
+      numberParser: () => 'z.any()',
+    },
+  }
+);
+
+console.log(parsed);
+```
+
+#### context.options
+
+`oasComponentsToZod` のオプションと同一。  
+以下のプロパティのみ使用可。
+
+- `context.options.withoutDefaults`
+- `context.options.withDesc`
+- `context.options.withAnchors`
+
+#### context.parsers
+
+`oasComponentsToZod` のオプションの `parses` と同一。
+
+### contextのその他のプロパティ
+
+型定義・ソースコードを参照のこと。
 
 ## CLI
 

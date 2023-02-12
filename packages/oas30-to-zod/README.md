@@ -21,7 +21,9 @@ Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 componen
     - [OpenAPI Specification 3.0.3](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
     - [Data Models (Schemas) - OpenAPI Guide](https://swagger.io/docs/specification/data-models/)
 
-## Limitations
+## Notes
+
+### Limitations
 
 - Document must be standalone.
     - `$ref` works only with `#/components/schemas/<component_name>` format.
@@ -32,7 +34,7 @@ Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 componen
     - `minProperties`
     - `maxProperties`
 
-## Supported `format`
+### Supported `format` value
 
 - `string`
     - `email` convert to `.email()`
@@ -48,14 +50,6 @@ See [Zod document](https://github.com/colinhacks/zod#strings) for details.
 
 ## API
 
-```js
-import { oasComponentsToZod } from 'oas30-to-zod';
-
-const zodSchemasString = await oasComponentsToZod('path/to/oas_document.yml');
-
-console.log(zodSchemasString);
-```
-
 ### oasComponentsToZod(input, options)
 
 | Parameter | Type               | Default | Required |
@@ -69,7 +63,16 @@ console.log(zodSchemasString);
 - `options`
     - See following
 
-### Options
+```js
+// e.g.
+import { oasComponentsToZod } from 'oas30-to-zod';
+
+const zodSchemasString = await oasComponentsToZod('path/to/oas_document.yml');
+
+console.log(zodSchemasString);
+```
+
+#### List of options
 
 | Name                  | Type                | Default   | Required |
 | :-------------------- | :------------------ | :-------- | :------- |
@@ -290,6 +293,66 @@ type StringPreset =
 
 See [default parsers](https://github.com/macropygia/oas-stack/tree/main/packages/oas30-to-zod/src/parsers) and [type definitions](https://github.com/macropygia/oas-stack/blob/main/packages/oas30-to-zod/src/types/index.ts).  
 Complex processing is possible when combined with a custom template.
+
+### parseSchema(schema, context)
+
+Use the parser alone.  
+Returns Zod schema as an unformatted string.
+
+| Parameter         | Type     | Default         | Required |
+| ----------------- | -------- | --------------- | -------- |
+| `schema`          | `object` |                 | Yes      |
+| `context`         | `object` |                 | No       |
+| `context.options` | `object` |                 | No       |
+| `context.parsers` | `object` |                 | No       |
+
+```ts
+// e.g.
+import { parseSchema } from 'oas30-to-zod';
+
+const parsed = parseSchema(
+  {
+    type: 'object',
+    required: ['Prop2'],
+    properties: {
+      Prop1: {
+        type: 'string',
+        pattern: '[a-z]+',
+        default: 'alpha',
+        description: 'beta',
+      },
+      Prop2: {
+        type: 'number',
+      },
+    },
+  },
+  {
+    options: { withAnchors: true, withDesc: true },
+    parsers: {
+      numberParser: () => 'z.any()',
+    },
+  }
+);
+
+console.log(parsed);
+```
+
+#### context.options
+
+Same as options in `oasComponentsToZod` .  
+Available only for the following properties.
+
+- `context.options.withoutDefaults`
+- `context.options.withDesc`
+- `context.options.withAnchors`
+
+#### context.parsers
+
+Same as `parsers` in options in `oasComponentsToZod` .
+
+### Other context properties
+
+See type definition and source code.
 
 ## CLI
 
