@@ -1,6 +1,5 @@
 import { describe, test, expect } from 'vitest'
 
-import { emptyContext as ctx, dummyParser } from '@tests/const.js'
 import { parseAllOf } from '@/parsers/parseAllOf.js'
 import { parseAnyOf } from '@/parsers/parseAnyOf.js'
 import { parseArray } from '@/parsers/parseArray.js'
@@ -14,6 +13,7 @@ import { parseObject } from '@/parsers/parseObject.js'
 import { parseOneOf } from '@/parsers/parseOneOf.js'
 import { parseReference } from '@/parsers/parseReference.js'
 import { parseString } from '@/parsers/parseString.js'
+import { emptyContext as ctx, dummyParser } from '@tests/const.js'
 
 ctx.parsers = {
   referenceParser: dummyParser,

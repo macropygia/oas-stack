@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 
-import { emptyContext as ctx } from '@tests/const.js'
 import { parseByType } from '@/parsers/utils/parseByType.js'
+import { emptyContext as ctx } from '@tests/const.js'
 
 describe('parseByType', () => {
   test('Reference', () => {

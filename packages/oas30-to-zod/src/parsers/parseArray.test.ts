@@ -1,8 +1,9 @@
 import { describe, test, expect } from 'vitest'
 
 import { parseArray } from '@/parsers/parseArray.js'
-import type { ArraySchemaObject } from '@/types/index.js'
 import { emptyContext as ctx } from '@tests/const.js'
+
+import type { ArraySchemaObject } from '@/types/index.js'
 
 describe('parseArray', () => {
   test('Empty', () => {

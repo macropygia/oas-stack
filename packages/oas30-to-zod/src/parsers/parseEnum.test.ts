@@ -1,8 +1,9 @@
 import { describe, test, expect } from 'vitest'
 
 import { parseEnum } from '@/parsers/parseEnum.js'
-import type { NonArraySchemaObject } from '@/types/index.js'
 import { emptyContext as ctx } from '@tests/const.js'
+
+import type { NonArraySchemaObject } from '@/types/index.js'
 
 describe('parseEnum', () => {
   test('String (multiple)', () => {

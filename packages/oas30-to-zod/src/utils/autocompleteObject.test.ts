@@ -1,7 +1,8 @@
 import { describe, test, expect } from 'vitest'
 
-import type { Document } from '@/types/index.js'
 import { autocompleteObject } from '@/utils/autocompleteObject.js'
+
+import type { Document } from '@/types/index.js'
 
 const doc: Document = {
   openapi: '',

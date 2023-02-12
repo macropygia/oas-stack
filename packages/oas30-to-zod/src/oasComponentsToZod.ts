@@ -1,23 +1,18 @@
 import path from 'node:path'
 // import { fileURLToPath } from 'node:url'
 
+import SwaggerParser from '@apidevtools/swagger-parser'
 import ejs from 'ejs'
 import fse from 'fs-extra'
-import SwaggerParser from '@apidevtools/swagger-parser'
-import { red } from 'ansis/colors'
-import type { OpenAPI, OpenAPIV3 } from 'openapi-types'
 
 import { defaultParseOptions, parseSchema } from '@/parseSchema.js'
-import type {
-  Document,
-  ComponentGraph,
-  Options,
-  ComponentName,
-} from '@/types/index.js'
 import { format } from '@/utils/format.js'
+import { generateGraph } from '@/utils/generateGraph'
 import { generatePrintingOrder } from '@/utils/generatePrintingOrder.js'
-import { autocompleteObject } from '@/utils/autocompleteObject.js'
-import { isV3, isValidDoc } from '@/utils/validateDoc.js'
+import { initDoc } from '@/utils/initDoc'
+
+import type { Document, Options, ComponentName } from '@/types/index.js'
+import type { OpenAPIV3 } from 'openapi-types'
 
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)
@@ -49,7 +44,7 @@ export const oasComponentsToZod = async (
 ): Promise<string> => {
   const options: Options = { ...defaultOptions, ...userOptions }
 
-  const doc = await init(input, options)
+  const doc = await initDoc(input, options)
 
   const dereferencedDoc = await SwaggerParser.dereference(
     JSON.parse(JSON.stringify(doc))
@@ -105,71 +100,4 @@ export const oasComponentsToZod = async (
   if (options.output) fse.outputFileSync(options.output, parsed)
 
   return parsed
-}
-
-/**
- * Verify settings and document
- * @param input - Document object or file path
- * @param options - Options
- * @returns Document object
- */
-const init = async (input: OpenAPI.Document | string, options: Options) => {
-  if (options.output)
-    await fse.ensureFile(options.output).catch((err) => {
-      console.error(red`Unable to create output file.`)
-      throw new Error(err)
-    })
-
-  if (options.template && !fse.existsSync(options.template))
-    throw new Error(`EJS template does not exists: ${options.template}`)
-
-  const doc =
-    typeof input === 'string' ? await SwaggerParser.bundle(input) : input
-
-  if (!isV3(doc)) {
-    console.error(
-      red`Document version mismatch. Only version 3.0 is supported.`
-    )
-    throw new Error('Only version 3.0 is supported.')
-  }
-
-  if (!isValidDoc(doc))
-    throw new Error(`Document has no 'components' or 'schemas'.`)
-
-  if (!options.disableAutocomplete) autocompleteObject(doc)
-
-  return doc
-}
-
-/**
- * Generate component graph from dereferenced document
- * @param dereferencedDoc - Dereferenced document
- */
-const generateGraph = (dereferencedDoc: Document): ComponentGraph => {
-  const compGraph: ComponentGraph = {
-    deps: {},
-    isObject: {},
-    isNullable: {},
-    hasDefault: {},
-  }
-
-  const resolvedSchemas = (dereferencedDoc as Document).components.schemas
-
-  Object.entries(resolvedSchemas).forEach(([compName, compSchema]) => {
-    // Object
-    if ('type' in compSchema && compSchema.type === 'object')
-      compGraph.isObject[compName] = true
-    else compGraph.isObject[compName] = false
-
-    // Nullable
-    if ('nullable' in compSchema && compSchema.nullable === true)
-      compGraph.isNullable[compName] = true
-    else compGraph.isNullable[compName] = false
-
-    // Default
-    if ('default' in compSchema) compGraph.hasDefault[compName] = true
-    else compGraph.hasDefault[compName] = false
-  })
-
-  return compGraph
 }

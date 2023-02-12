@@ -1,7 +1,7 @@
 import { red } from 'ansis/colors'
-import type { OpenAPIV3 } from 'openapi-types'
 
 import { parseSchema } from '@/parseSchema.js'
+
 import type {
   NonArraySchemaObject,
   ObjectParser,
@@ -9,6 +9,7 @@ import type {
   ReferenceObject,
   SchemaObject,
 } from '@/types/index.js'
+import type { OpenAPIV3 } from 'openapi-types'
 
 export const parseObject: ObjectParser = (schema, ctx) => {
   if (typeof ctx.parsers?.objectParser === 'function')

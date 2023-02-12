@@ -2,6 +2,7 @@ import { describe, test, expect } from 'vitest'
 
 import { parseObject } from '@/parsers/parseObject.js'
 import { emptyContext as ctx } from '@tests/const.js'
+
 import type { SchemaObject } from '@/types/index.js'
 
 describe('parseObject', () => {

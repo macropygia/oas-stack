@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest'
 
-import { minimumOutput } from '@tests/const.js'
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
+import { minimumOutput } from '@tests/const.js'
 
 describe('Misc', async () => {
-  test('graph.isNullable', async () => {
+  test('Nullable with default', async () => {
     await expect(
       oasComponentsToZod('__tests__/nullable.yml', {
         ...minimumOutput,

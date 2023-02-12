@@ -1,5 +1,5 @@
-import type prettier from 'prettier'
 import type { OpenAPIV3 } from 'openapi-types'
+import type prettier from 'prettier'
 
 type Modify<T, R> = Omit<T, keyof R> & R
 

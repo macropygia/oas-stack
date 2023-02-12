@@ -33,7 +33,25 @@ module.exports = defineConfig({
     'n/no-unsupported-features/es-syntax': 'off', // Required to use import
     'n/no-unsupported-features/node-builtins': 'off',
     // eslint-plugin-import
-    'import/order': ['error', { 'newlines-between': 'always' }], // Required to use autofix
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always',
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling'],
+          'index',
+          'object',
+          'type',
+          'unknown',
+        ],
+        alphabetize: {
+          order: 'asc',
+        },
+      },
+    ], // Required to use autofix
     'import/no-named-as-default-member': 'off', // When building a subproject with dual packages, some packages will not load if this option is satisfied.
     // eslint-import-resolver-typescript
     'import/no-unresolved': 'error', // Enable main feature

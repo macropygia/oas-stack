@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 
-import { emptyContext as ctx } from '@tests/const.js'
 import { parseSchema } from '@/parseSchema.js'
+import { emptyContext as ctx } from '@tests/const.js'
 
 ctx.options = {
   withDesc: true,

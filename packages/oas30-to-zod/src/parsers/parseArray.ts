@@ -1,4 +1,5 @@
 import { parseSchema } from '@/parseSchema.js'
+
 import type { ArrayParser } from '@/types/index.js'
 
 export const parseArray: ArrayParser = (schema, ctx) => {

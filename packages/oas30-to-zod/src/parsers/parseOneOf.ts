@@ -1,6 +1,7 @@
 import { red, yellow } from 'ansis/colors'
 
 import { parseSchema } from '@/parseSchema.js'
+
 import type { OneOfParser } from '@/types/index.js'
 
 export const parseOneOf: OneOfParser = (schema, ctx) => {

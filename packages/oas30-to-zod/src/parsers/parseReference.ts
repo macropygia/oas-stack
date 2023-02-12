@@ -1,7 +1,8 @@
 import { red } from 'ansis/colors'
 
-import type { ReferenceParser } from '@/types/index.js'
 import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
+
+import type { ReferenceParser } from '@/types/index.js'
 
 export const parseReference: ReferenceParser = (schema, ctx) => {
   if (typeof ctx.parsers?.referenceParser === 'function')
