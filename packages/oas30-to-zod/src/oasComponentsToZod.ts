@@ -51,36 +51,11 @@ export const oasComponentsToZod = async (
 
   const doc = await init(input, options)
 
-  if (!options.disableAutocomplete) autocompleteObject(doc)
-
-  const compGraph: ComponentGraph = {
-    deps: {},
-    isObject: {},
-    isNullable: {},
-    hasDefault: {},
-  }
-
   const dereferencedDoc = await SwaggerParser.dereference(
     JSON.parse(JSON.stringify(doc))
-  ).then((deref) => {
-    const resolvedSchemas = (deref as Document).components.schemas
-    Object.entries(resolvedSchemas).forEach(([compName, compSchema]) => {
-      // Object
-      if ('type' in compSchema && compSchema.type === 'object')
-        compGraph.isObject[compName] = true
-      else compGraph.isObject[compName] = false
+  ).then((deref) => deref as Document)
 
-      // Nullable
-      if ('nullable' in compSchema && compSchema.nullable === true)
-        compGraph.isNullable[compName] = true
-      else compGraph.isNullable[compName] = false
-
-      // Default
-      if ('default' in compSchema) compGraph.hasDefault[compName] = true
-      else compGraph.hasDefault[compName] = false
-    })
-    return deref as Document
-  })
+  const graph = generateGraph(dereferencedDoc)
 
   const targetDoc = options.dereference ? dereferencedDoc : doc
   const targetSchema = targetDoc.components.schemas
@@ -94,44 +69,50 @@ export const oasComponentsToZod = async (
     parsedComponents[compName] = parseSchema(compSchema, {
       options,
       parsers: options.parsers,
-      graph: compGraph,
+      graph,
       name: compName,
       deps,
       doc: targetDoc,
       schemas: targetDoc.components.schemas,
       data,
     })
-    compGraph.deps[compName] = deps
+    graph.deps[compName] = deps
   })
 
   // Create a shallow copy of deps for destructive processing
-  const componentDeps = Object.assign({}, compGraph.deps)
+  const componentDeps = Object.assign({}, graph.deps)
   const printingOrder = generatePrintingOrder(componentDeps)
 
   const template = options.template
     ? fse.readFileSync(options.template).toString()
     : fse.readFileSync(path.resolve(__dirname, 'default.ts.ejs')).toString()
 
-  const raw = ejs.render(template, {
+  const rawParsed = ejs.render(template, {
     // Processed data
     parsedComponents,
     printingOrder,
     // Options
     ...options,
     // Graph
-    graph: compGraph,
+    graph,
     data,
   })
 
   const parsed = options.disableFormat
-    ? raw
-    : format(raw, options.inheritPrettier)
+    ? rawParsed
+    : format(rawParsed, options.inheritPrettier)
 
   if (options.output) fse.outputFileSync(options.output, parsed)
 
   return parsed
 }
 
+/**
+ * Verify settings and document
+ * @param input - Document object or file path
+ * @param options - Options
+ * @returns Document object
+ */
 const init = async (input: OpenAPI.Document | string, options: Options) => {
   if (options.output)
     await fse.ensureFile(options.output).catch((err) => {
@@ -155,5 +136,40 @@ const init = async (input: OpenAPI.Document | string, options: Options) => {
   if (!isValidDoc(doc))
     throw new Error(`Document has no 'components' or 'schemas'.`)
 
+  if (!options.disableAutocomplete) autocompleteObject(doc)
+
   return doc
+}
+
+/**
+ * Generate component graph from dereferenced document
+ * @param dereferencedDoc - Dereferenced document
+ */
+const generateGraph = (dereferencedDoc: Document): ComponentGraph => {
+  const compGraph: ComponentGraph = {
+    deps: {},
+    isObject: {},
+    isNullable: {},
+    hasDefault: {},
+  }
+
+  const resolvedSchemas = (dereferencedDoc as Document).components.schemas
+
+  Object.entries(resolvedSchemas).forEach(([compName, compSchema]) => {
+    // Object
+    if ('type' in compSchema && compSchema.type === 'object')
+      compGraph.isObject[compName] = true
+    else compGraph.isObject[compName] = false
+
+    // Nullable
+    if ('nullable' in compSchema && compSchema.nullable === true)
+      compGraph.isNullable[compName] = true
+    else compGraph.isNullable[compName] = false
+
+    // Default
+    if ('default' in compSchema) compGraph.hasDefault[compName] = true
+    else compGraph.hasDefault[compName] = false
+  })
+
+  return compGraph
 }
