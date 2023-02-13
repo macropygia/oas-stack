@@ -8,9 +8,6 @@
     "noEmitOnError": true,
     "allowSyntheticDefaultImports": true,
 
-    "checkJs": false,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true
+    "checkJs": false
   }
 }

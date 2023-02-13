@@ -15,7 +15,12 @@
   },
   "keywords": [
     "openapi",
-    "zod"
+    "swagger",
+    "json",
+    "yaml",
+    "zod",
+    "converter",
+    "cli"
   ],
   "files": [
     "dist"
