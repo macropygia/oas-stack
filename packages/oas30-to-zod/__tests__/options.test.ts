@@ -2,7 +2,7 @@ import fse from 'fs-extra'
 import { describe, test, expect } from 'vitest'
 
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
-import { minimumOutput } from '@tests/const.js'
+import { minimizeOutput } from '@tests/const.js'
 
 describe('Options', async () => {
   test('Disable format', async () => {
@@ -24,7 +24,7 @@ describe('Options', async () => {
 
   test('Enable output', async () => {
     await oasComponentsToZod('__tests__/minimum.yml', {
-      ...minimumOutput,
+      ...minimizeOutput,
       output: '__tests__/minimum.ts',
     })
 
@@ -40,7 +40,7 @@ describe('Options', async () => {
   test('Enable dereference', async () => {
     await expect(
       oasComponentsToZod('__tests__/dereference.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         dereference: true,
       })
     ).resolves.toMatchSnapshot()
@@ -65,7 +65,7 @@ describe('Options', async () => {
   test('Export individually', async () => {
     await expect(
       oasComponentsToZod('__tests__/minimum.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         individually: true,
       })
     ).resolves.toMatchInlineSnapshot(`
@@ -77,7 +77,7 @@ describe('Options', async () => {
   test('Add `eslint-disable`', async () => {
     await expect(
       oasComponentsToZod('__tests__/minimum.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         eslintDisable: true,
       })
     ).resolves.toMatchInlineSnapshot(`
@@ -91,7 +91,7 @@ describe('Options', async () => {
   test('Add `eslint-disable` with single rule', async () => {
     await expect(
       oasComponentsToZod('__tests__/minimum.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         eslintDisable: true,
         disableRules: ['no-control-regex'],
       })
@@ -106,7 +106,7 @@ describe('Options', async () => {
   test('Add `eslint-disable` with multiple rules', async () => {
     await expect(
       oasComponentsToZod('__tests__/minimum.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         eslintDisable: true,
         disableRules: ['no-control-regex', 'import/no-named-export'],
       })
@@ -121,7 +121,7 @@ describe('Options', async () => {
   test('Disable `.default()`', async () => {
     await expect(
       oasComponentsToZod('__tests__/string.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         withoutDefaults: true,
       })
     ).resolves.toMatchInlineSnapshot(`
@@ -133,7 +133,7 @@ describe('Options', async () => {
   test('Enable `.descrive()`', async () => {
     await expect(
       oasComponentsToZod('__tests__/string.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
         withDesc: true,
       })
     ).resolves.toMatchInlineSnapshot(`

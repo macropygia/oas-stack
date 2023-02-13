@@ -1,13 +1,13 @@
 import { describe, test, expect } from 'vitest'
 
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
-import { minimumOutput } from '@tests/const.js'
+import { minimizeOutput } from '@tests/const.js'
 
 describe('Misc', async () => {
   test('Nullable with default', async () => {
     await expect(
       oasComponentsToZod('__tests__/nullable.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
       })
     ).resolves.toMatchInlineSnapshot(`
       "const Nullable = z.string().nullable();
@@ -19,7 +19,7 @@ describe('Misc', async () => {
   test('Complex regex', async () => {
     await expect(
       oasComponentsToZod('__tests__/regex.yml', {
-        ...minimumOutput,
+        ...minimizeOutput,
       })
     ).resolves.toMatchSnapshot()
   })

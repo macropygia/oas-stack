@@ -21,9 +21,9 @@ export const emptyContext: ParseContext = {
 export const dummyParser = (schema: any, ctx: any) => 'dummy' // eslint-disable-line
 
 /**
- * Minimum output settings
+ * Options object for minimizing output.
  */
-export const minimumOutput: Options = {
+export const minimizeOutput: Options = {
   withoutImport: true,
   withoutExport: true,
 }

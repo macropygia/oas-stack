@@ -6,8 +6,9 @@ import {
   hasSchemas,
   isValidDoc,
 } from '@/utils/validateDoc.js'
+import { minimumDocument } from '@tests/const'
 
-const minimumDoc = {
+const docWithoutComponents = {
   openapi: '3.0.0',
   info: {
     title: 'title',
@@ -18,29 +19,24 @@ const minimumDoc = {
 
 describe('validateDoc', () => {
   test('isV3: valid', () => {
-    expect(isV3(minimumDoc)).toBeTruthy()
+    expect(isV3(minimumDocument)).toBeTruthy()
   })
 
   test('isV3: invlaid', () => {
     expect(
       isV3({
-        ...minimumDoc,
+        ...minimumDocument,
         openapi: '3.1.0',
       })
     ).toBeFalsy()
   })
 
   test('hasComponents: valid', () => {
-    expect(
-      hasComponents({
-        ...minimumDoc,
-        components: {},
-      })
-    ).toBeTruthy()
+    expect(hasComponents(minimumDocument)).toBeTruthy()
   })
 
   test('hasComponents: invalid', () => {
-    expect(hasComponents(minimumDoc)).toBeFalsy()
+    expect(hasComponents(docWithoutComponents)).toBeFalsy()
   })
 
   test('hasSchemas: valid', () => {
@@ -52,17 +48,10 @@ describe('validateDoc', () => {
   })
 
   test('isValidDoc: valid', () => {
-    expect(
-      isValidDoc({
-        ...minimumDoc,
-        components: {
-          schemas: {},
-        },
-      })
-    ).toBeTruthy()
+    expect(isValidDoc(minimumDocument)).toBeTruthy()
   })
 
   test('isValidDoc: invalid', () => {
-    expect(isValidDoc(minimumDoc)).toBeFalsy()
+    expect(isValidDoc(docWithoutComponents)).toBeFalsy()
   })
 })

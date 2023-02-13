@@ -29,6 +29,8 @@ cli
   .option('--disable-autocomplete', "Disable autocomplete `type: 'object'`")
   .option('-t, --template <path>', 'Template path for EJS')
   .action(async (input: string, options: CliOptions) => {
+    console.log('oas30-to-zod', green`Start processing...`)
+
     const output: string =
       options.output ||
       path.format({...path.parse(input), ...{ ext: '.ts', base: undefined }})
@@ -39,7 +41,7 @@ cli
 
     await oasComponentsToZod(input, { ...options, output, disableRules })
 
-    console.log('oas30-to-zod', cyan`Output:`, output)
+    console.log('oas30-to-zod', cyan`Output path:`, output)
     console.log('oas30-to-zod', green`Done`)
   })
 
