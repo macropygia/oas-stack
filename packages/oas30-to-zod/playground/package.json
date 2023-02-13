@@ -1,0 +1,39 @@
+{
+  "name": "playground2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "node server.js",
+    "play": "run-p dev serve"
+  },
+  "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.5.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fastify/cors": "^8.2.0",
+    "ace-builds": "^1.15.1",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.13.0",
+    "framer-motion": "^9.0.2",
+    "preact": "^10.12.1",
+    "react": "npm:@preact/compat@^17.1.2",
+    "react-ace": "^10.1.0",
+    "react-dom": "npm:@preact/compat@^17.1.2",
+    "react-icons": "^4.7.1",
+    "strip-ansi": "^7.0.1",
+    "yaml": "^2.2.1"
+  },
+  "devDependencies": {
+    "@chakra-ui/system": "^2.5.0",
+    "@preact/preset-vite": "^2.5.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1"
+  }
+}
