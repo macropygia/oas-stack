@@ -39,7 +39,7 @@ describe('parseSchema', () => {
         }
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().regex(new RegExp("^[a-z]+$")).default("alpha").describe("beta").optional(),"Prop2":dummy})"'
+      '"z.object({"Prop1":z.string().regex(new RegExp("^[a-z]+$")).default("alpha").describe("beta"),"Prop2":dummy})"'
     )
   })
 })

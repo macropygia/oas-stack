@@ -19,7 +19,7 @@ describe('parseObject', () => {
         ctx
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().optional(),"Prop2":z.number().optional()})"'
+      '"z.object({"Prop1":z.string(),"Prop2":z.number()}).partial()"'
     )
   })
 
@@ -83,7 +83,7 @@ describe('parseObject', () => {
         ctx
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().optional()}).catchall(z.any())"'
+      '"z.object({"Prop1":z.string()}).partial().catchall(z.any())"'
     )
   })
 
@@ -100,7 +100,7 @@ describe('parseObject', () => {
         ctx
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().optional()}).strict()"'
+      '"z.object({"Prop1":z.string()}).partial().strict()"'
     )
   })
 
@@ -117,7 +117,7 @@ describe('parseObject', () => {
         ctx
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().optional()}).catchall(z.string())"'
+      '"z.object({"Prop1":z.string()}).partial().catchall(z.string())"'
     )
   })
 
@@ -136,7 +136,7 @@ describe('parseObject', () => {
         ctx
       )
     ).toMatchInlineSnapshot(
-      '"z.object({"Prop1":z.string().optional()}).catchall(Comp1)"'
+      '"z.object({"Prop1":z.string()}).partial().catchall(Comp1)"'
     )
   })
 
@@ -208,6 +208,6 @@ describe('parseObject', () => {
         } as SchemaObject & { type: 'object'; properties?: undefined },
         ctx
       )
-    ).toMatchInlineSnapshot('"z.object({})"')
+    ).toMatchInlineSnapshot('"z.undefined()"')
   })
 })

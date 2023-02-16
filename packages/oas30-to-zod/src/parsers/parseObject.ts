@@ -8,17 +8,31 @@ import type {
   ParseContext,
   ReferenceObject,
   SchemaObject,
+  MixedObject,
 } from '@/types/index.js'
-import type { OpenAPIV3 } from 'openapi-types'
+
+type ObjectSchema = NonArraySchemaObject & {
+  type: 'object'
+}
+type ObjectSchemaWithProps = ObjectSchema & {
+  properties: Record<string, MixedObject>
+}
+type ObjectSchemaWithoutProps = ObjectSchema & {
+  additionalProperties: boolean | ReferenceObject | SchemaObject
+}
 
 export const parseObject: ObjectParser = (schema, ctx) => {
   if (typeof ctx.parsers?.objectParser === 'function')
     return ctx.parsers.objectParser(schema, ctx)
 
-  if ('properties' in schema) return parseChildren(schema, ctx)
+  if (typeof schema.properties === 'object')
+    return parseWithProps(schema as ObjectSchemaWithProps, ctx)
 
-  if ('additionalProperties' in schema)
-    return parseWithoutChildren(schema.additionalProperties, ctx)
+  if (
+    typeof schema.additionalProperties === 'boolean' ||
+    typeof schema.additionalProperties === 'object'
+  )
+    return parseWithoutProps(schema as ObjectSchemaWithoutProps, ctx)
 
   console.error(
     ctx.name,
@@ -27,63 +41,101 @@ export const parseObject: ObjectParser = (schema, ctx) => {
   return 'z.undefined()'
 }
 
-const parseChildren = (
-  schema: NonArraySchemaObject & { type: 'object' },
-  ctx: ParseContext
-) => {
-  const children = parseProperties(schema, ctx)
+/**
+ * Parse object schema with properties
+ * @param schema - Object schema with properties
+ * @param ctx - Context
+ * @returns Zod schema
+ */
+const parseWithProps = (schema: ObjectSchemaWithProps, ctx: ParseContext) => {
+  const isPartial = !hasRequiredChild(schema)
+  const partialFragment = isPartial ? '.partial()' : ''
+
+  const props = parseProperties(schema, ctx, isPartial)
 
   if (schema.additionalProperties === true)
-    return `z.object({${children}}).catchall(z.any())`
+    return `z.object({${props}})${partialFragment}.catchall(z.any())`
 
   if (schema.additionalProperties === false)
-    return `z.object({${children}}).strict()`
+    return `z.object({${props}})${partialFragment}.strict()`
 
   if (typeof schema.additionalProperties === 'object')
-    return `z.object({${children}}).catchall(${parseSchema(
+    return `z.object({${props}})${partialFragment}.catchall(${parseSchema(
       schema.additionalProperties,
       ctx
     )})`
 
-  return `z.object({${children}})`
+  return `z.object({${props}})${partialFragment}`
 }
 
+/**
+ * Find out if the object schema has the required property
+ * @param schema - Object schema with properties
+ * @returns boolean
+ */
+const hasRequiredChild = (schema: ObjectSchemaWithProps): boolean => {
+  if (
+    schema.required &&
+    schema.required.filter((requiredProp) => schema.properties[requiredProp])
+      .length
+  )
+    return true
+
+  return false
+}
+
+/**
+ * Parse properties
+ * @param schema - Object schema with properties
+ * @param ctx - Context
+ * @param shouldOmitOptional - Should omit `.optional()`
+ * @returns Zod schema
+ */
 const parseProperties = (
-  schema: OpenAPIV3.NonArraySchemaObject,
-  ctx: ParseContext
+  schema: ObjectSchemaWithProps,
+  ctx: ParseContext,
+  shouldOmitOptional: boolean
 ) =>
-  Object.entries(schema.properties ?? {}).map(([childName, childSchema]) => {
-    const parsedChild = parseSchema(childSchema, ctx)
-    const parsed = `${JSON.stringify(childName)}:${parsedChild}`
+  Object.entries(schema.properties).map(([propName, propSchema]) => {
+    const parsedProp = parseSchema(propSchema, ctx)
+    const parsed = `${JSON.stringify(propName)}:${parsedProp}`
 
     // Referenced component has `.default()`
     if (
       !ctx.options.withoutDefaults &&
-      !parsedChild.startsWith('z.') &&
-      ctx.graph.hasDefault[parsedChild] === true
-    ) {
+      !parsedProp.startsWith('z.') &&
+      ctx.graph.hasDefault[parsedProp] === true
+    )
       return parsed
-    }
+
+    // No need to add `.optional()` if `.default()` exists
+    if (!ctx.options.withoutDefaults && 'default' in propSchema) return parsed
 
     if (
-      // No need to add `.optional()` if `.default()` exists
-      (!ctx.options.withoutDefaults && 'default' in childSchema) ||
-      !schema.required ||
-      !schema.required.includes(childName)
+      !shouldOmitOptional &&
+      (!schema.required || !schema.required.includes(propName))
     )
       return `${parsed}.optional()`
 
     return parsed
   })
 
-const parseWithoutChildren = (
-  addProps: boolean | ReferenceObject | SchemaObject,
+/**
+ * Parse object schema that only has `additionalProperties`
+ * @param schema - Object schema without properties
+ * @param ctx - Context
+ * @returns Zod schema
+ */
+const parseWithoutProps = (
+  schema: ObjectSchemaWithoutProps,
   ctx: ParseContext
 ) => {
-  if (typeof addProps === 'object')
-    return `z.record(${parseSchema(addProps, ctx)})`
+  const { additionalProperties } = schema
 
-  if (addProps === false) return 'z.object({}).strict()'
+  if (typeof additionalProperties === 'object')
+    return `z.record(${parseSchema(additionalProperties, ctx)})`
+
+  if (additionalProperties === false) return 'z.object({}).strict()'
 
   return 'z.record(z.any())'
 }

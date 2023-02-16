@@ -71,7 +71,7 @@ describe('parseAllOf', () => {
         }
       )
     ).toMatchInlineSnapshot(
-      '"Comp1.merge(z.object({"Prop1":z.string().optional()}))"'
+      '"Comp1.merge(z.object({"Prop1":z.string()}).partial())"'
     )
   })
 

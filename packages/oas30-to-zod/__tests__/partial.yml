@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: partial
+paths:
+components:
+  schemas:
+    WithDefault:
+      type: string
+      default: alpha
+    WithoutDefault:
+      type: string
+    Comp1:
+      type: object
+      properties:
+        Prop1:
+          type: string
+        Prop2:
+          type: string
+    Comp2:
+      type: object
+      properties:
+        Prop1:
+          $ref: '#/components/schemas/WithDefault'
+        Prop2:
+          $ref: '#/components/schemas/WithoutDefault'
+        Prop3:
+          type: object
+          required:
+            - Prop3_2
+          properties:
+            Prop3_1:
+              $ref: '#/components/schemas/WithDefault'
+            Prop3_2:
+              $ref: '#/components/schemas/WithoutDefault'
+            Prop3_3:
+              type: object
+              properties:
+                Prop3_3_1:
+                  type: string
+                Prop3_3_2:
+                  type: string
+                  default: foo
+    Comp3:
+      type: object
+      required:
+        - Prop3
+      properties:
+        Prop1:
+          type: string
+        Prop2:
+          type: string
