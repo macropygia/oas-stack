@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.9
+
+### Patch Changes
+
+- 39b2d0a: Add support `.partial()`
+
 ## 0.0.8
 
 ### Patch Changes
