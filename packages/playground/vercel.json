@@ -1,0 +1,10 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "next build",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/dist/server.js"
+    }
+  ]
+}
