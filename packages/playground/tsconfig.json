@@ -19,6 +19,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "include": ["client", "types"]
+  "include": ["src", "api"]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }

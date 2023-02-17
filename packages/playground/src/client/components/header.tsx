@@ -10,7 +10,7 @@ import {
 import { useRef } from 'preact/hooks'
 import { RiSettings5Fill, RiGithubFill, RiNpmjsFill } from 'react-icons/ri'
 
-import packageJson from '../../../oas30-to-zod/package.json'
+import packageJson from '../../../../oas30-to-zod/package.json'
 
 import type { HeaderProps } from '../../types'
 

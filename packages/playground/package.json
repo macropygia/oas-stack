@@ -4,7 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "play": "node --loader ts-node/esm server/server.ts"
+    "dev": "vite",
+    "build:config": "tsc -p tsconfig.node.json",
+    "build:server": "tsc -p tsconfig.server.json",
+    "build:client": "vite build src/client --outDir ../../dist/client",
+    "build": "pnpm build:config && pnpm build:server && pnpm build:client",
+    "play": "node --loader ts-node/esm src/server/server.ts",
+    "serve": "node dist/server/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
