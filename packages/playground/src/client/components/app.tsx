@@ -11,7 +11,12 @@ import { defaultDoc, defaultOptions } from '../../const'
 import type { Options } from '../../types'
 import type { Ace } from 'ace-builds'
 
-console.log(import.meta.env)
+const protocol = import.meta.env.VITE_PROTOCOL
+  ? import.meta.env.VITE_PROTOCOL
+  : 'http'
+const domain = import.meta.env.VITE_DOMAIN
+  ? import.meta.env.VITE_DOMAIN
+  : 'localhost'
 const port = import.meta.env.VITE_PORT
   ? parseInt(import.meta.env.VITE_PORT, 10)
   : 3000
@@ -39,7 +44,7 @@ export function App() {
 
   const convert = async () => {
     const prettierConfig = JSON.parse(options.inheritPrettier)
-    await fetch(`http://localhost:${port}/z`, {
+    await fetch(`${protocol}://${domain}:${port}/z`, {
       method: 'POST',
       headers: {
         'Access-Control-Allow-Origin': '*',
