@@ -11,8 +11,9 @@
     "isolatedModules": true,
     "noEmitOnError": true,
 
-    "outDir": "dist"
+    "outDir": "dist/server"
   },
-  "include": ["src/server", "src/api"]
+  "include": ["src/server"]
+  // "include": ["src/server", "src/api"]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }
