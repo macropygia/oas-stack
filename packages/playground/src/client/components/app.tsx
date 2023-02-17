@@ -11,11 +11,9 @@ import { defaultDoc, defaultOptions } from '../../const'
 import type { Options } from '../../types'
 import type { Ace } from 'ace-builds'
 
-const protocol = import.meta.env.VITE_PROTOCOL
-  ? import.meta.env.VITE_PROTOCOL
-  : 'http'
-const domain = import.meta.env.VITE_DOMAIN
-  ? import.meta.env.VITE_DOMAIN
+const protocol = import.meta.env.VITE_VERCEL_URL ? 'https' : 'http'
+const domain = import.meta.env.VITE_VERCEL_URL
+  ? import.meta.env.VITE_VERCEL_URL
   : 'localhost'
 const port = import.meta.env.VITE_PORT
   ? parseInt(import.meta.env.VITE_PORT, 10)
