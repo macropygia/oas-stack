@@ -14,11 +14,8 @@ import type { FastifyReply, FastifyInstance } from 'fastify'
 dotenv.config()
 
 const isDev = process.env['NODE_ENV'] !== 'production' ? true : false
-const port = process.env['API_PORT']
-  ? parseInt(process.env['API_PORT'], 10)
-  : 3000
 
-async function main() {
+export default async (req: Request, res: Response) => {
   const fastify = Fastify({ logger: isDev })
 
   await fastify.register(cors, {
@@ -41,10 +38,5 @@ async function main() {
 
   await (fastify as FastifyInstance & { vite?: any }).vite.ready()
 
-  return fastify
-}
-
-if (process.argv[1] === new URL(import.meta.url).pathname) {
-  const server = await main()
-  await server.listen({ port })
+  fastify.server.emit('request', req, res)
 }
