@@ -11,7 +11,7 @@ type RequestBody = {
 }
 
 export const converter: FastifyPluginCallback = (fastify, _options, done) => {
-  fastify.post('/', async (req) => {
+  fastify.post('/api/z', async (req) => {
     const body = req.body as RequestBody
     const docStr = body.doc
     const options = body.options
@@ -26,7 +26,7 @@ export const converter: FastifyPluginCallback = (fastify, _options, done) => {
 
     const doc = docStr.startsWith('{') ? JSON.parse(docStr) : YAML.parse(docStr)
 
-    if (!doc) return ''
+    if (typeof doc !== 'object') return ''
 
     try {
       const parsed = await oasComponentsToZod(doc, options)

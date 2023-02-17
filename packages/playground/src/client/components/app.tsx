@@ -43,10 +43,9 @@ export function App() {
 
   const convert = async () => {
     const prettierConfig = JSON.parse(options.inheritPrettier)
-    await fetch(`${protocol}://${domain}${portFragment}/`, {
+    await fetch(`${protocol}://${domain}${portFragment}/api/z`, {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({

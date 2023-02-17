@@ -1,5 +1,6 @@
 import { join, dirname } from 'node:path'
 
+import cors from '@fastify/cors'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import FastifyVite from '@fastify/vite'
@@ -13,12 +14,18 @@ import type { FastifyReply, FastifyInstance } from 'fastify'
 dotenv.config()
 
 const isDev = process.env['NODE_ENV'] !== 'production' ? true : false
+// const isVercel = process.env['VITE_VERCEL_URL'] ? true : false
 const port = process.env['API_PORT']
   ? parseInt(process.env['API_PORT'], 10)
   : 3000
 
 export async function main() {
   const fastify = Fastify({ logger: isDev })
+
+  await fastify.register(cors, {
+    // origin: isVercel ? /vercel\.app$/ : '*',
+    origin: '*',
+  })
 
   // Register internal plugin for oas30-to-zod
   fastify.register(converter)
