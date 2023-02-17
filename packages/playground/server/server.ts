@@ -30,7 +30,7 @@ async function main() {
 
   // Register @fastify/vite plugin
   await fastify.register(FastifyVite, {
-    root: join(dirname(new URL(import.meta.url).pathname), '../../'),
+    root: join(dirname(new URL(import.meta.url).pathname), '../'),
     dev: isDev,
     spa: true,
   })

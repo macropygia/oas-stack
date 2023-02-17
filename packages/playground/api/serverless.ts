@@ -7,7 +7,7 @@ import FastifyVite from '@fastify/vite'
 import * as dotenv from 'dotenv'
 import Fastify from 'fastify'
 
-import { converter } from '../src/server/converter.js'
+import { converter } from '../server/converter.js'
 
 import type { FastifyReply, FastifyInstance } from 'fastify'
 
