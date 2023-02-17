@@ -41,5 +41,5 @@ export async function main() {
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {
   const server = await main()
-  await server.listen({ port, host: '0.0.0.0' })
+  await server.listen({ port })
 }

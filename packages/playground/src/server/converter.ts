@@ -11,7 +11,7 @@ type RequestBody = {
 }
 
 export const converter: FastifyPluginCallback = (fastify, _options, done) => {
-  fastify.post('/z', async (req) => {
+  fastify.post('/', async (req) => {
     const body = req.body as RequestBody
     const docStr = body.doc
     const options = body.options
