@@ -15,9 +15,10 @@ const protocol = import.meta.env.VITE_VERCEL_URL ? 'https' : 'http'
 const domain = import.meta.env.VITE_VERCEL_URL
   ? import.meta.env.VITE_VERCEL_URL
   : 'localhost'
-const port = import.meta.env.VITE_PORT
-  ? parseInt(import.meta.env.VITE_PORT, 10)
+const port = import.meta.env.VITE_API_PORT
+  ? parseInt(import.meta.env.VITE_API_PORT, 10)
   : 3000
+const portFragment = port === 80 ? '' : `:${port}`
 
 export function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -42,7 +43,7 @@ export function App() {
 
   const convert = async () => {
     const prettierConfig = JSON.parse(options.inheritPrettier)
-    await fetch(`${protocol}://${domain}:${port}/z`, {
+    await fetch(`${protocol}://${domain}${portFragment}/z`, {
       method: 'POST',
       headers: {
         'Access-Control-Allow-Origin': '*',

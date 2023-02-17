@@ -26,7 +26,7 @@ export function Header(props: HeaderProps) {
   return (
     <Flex align="center">
       <Box pl={3} pr={3} fontSize={18}>
-        {packageJson.name}@{packageJson.version} Playground
+        {packageJson.name}@{packageJson.version} playground
       </Box>
       <Spacer />
       <Wrap p={1}>

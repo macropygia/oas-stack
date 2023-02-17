@@ -13,7 +13,9 @@ import type { FastifyReply, FastifyInstance } from 'fastify'
 dotenv.config()
 
 const isDev = process.env['NODE_ENV'] !== 'production' ? true : false
-const port = process.env['PORT'] ? parseInt(process.env['PORT'], 10) : 3000
+const port = process.env['API_PORT']
+  ? parseInt(process.env['API_PORT'], 10)
+  : 3000
 
 export async function main() {
   const fastify = Fastify({ logger: isDev })
@@ -23,7 +25,6 @@ export async function main() {
 
   // Register @fastify/vite plugin
   await fastify.register(FastifyVite, {
-    // root: import.meta.url,
     root: join(dirname(new URL(import.meta.url).pathname), '../../'),
     dev: isDev,
     spa: true,
@@ -40,5 +41,5 @@ export async function main() {
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {
   const server = await main()
-  await server.listen({ port })
+  await server.listen({ port, host: '0.0.0.0' })
 }
