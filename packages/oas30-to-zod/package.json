@@ -1,6 +1,6 @@
 {
   "name": "oas30-to-zod",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Generate Zod schemas from OpenAPI 3.0 Components Object",
   "author": "macropygia",
   "license": "MIT",
@@ -15,7 +15,12 @@
   },
   "keywords": [
     "openapi",
-    "zod"
+    "swagger",
+    "json",
+    "yaml",
+    "zod",
+    "converter",
+    "cli"
   ],
   "files": [
     "dist"
