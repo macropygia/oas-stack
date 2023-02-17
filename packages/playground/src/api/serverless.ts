@@ -35,7 +35,7 @@ fastify.get('/', (_req, reply) => {
   ;(reply as FastifyReply & { html: any }).html()
 })
 
-export default async (req: Request, res: Response) => {
+export default async function handler(req: Request, res: Response) {
   await (fastify as FastifyInstance & { vite?: any }).vite.ready()
 
   fastify.server.emit('request', req, res)
