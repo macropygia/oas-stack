@@ -1,4 +1,4 @@
-import type { OutputProps } from '../types'
+import type { OutputProps } from '../../types'
 import type { Ace } from 'ace-builds'
 
 export function Output(props: OutputProps) {

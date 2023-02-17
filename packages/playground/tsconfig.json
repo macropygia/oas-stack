@@ -4,16 +4,21 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ESNext",
     "module": "ESNext",
-    "useDefineForClassFields": true,
-    // "allowJs": false,
-    "esModuleInterop": false,
+    "moduleResolution": "node",
+
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"]
+    },
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
+  // "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,6 +1,6 @@
-import { defaultDoc } from '../const'
+import { defaultDoc } from '../../const'
 
-import type { InputProps } from '../types'
+import type { InputProps } from '../../types'
 import type { Ace } from 'ace-builds'
 
 export function Input(props: InputProps) {

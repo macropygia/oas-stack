@@ -1,20 +1,25 @@
 import { Grid, GridItem, useDisclosure } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'preact/hooks'
-// import AceEditor from 'react-ace'
+import AceEditor from 'react-ace'
 
 import { Header } from './header'
+import { Input } from './input'
 import { Menu } from './menu'
+import { Output } from './output'
 import { defaultDoc, defaultOptions } from '../../const'
-// import { Input } from './input'
-// import { Output } from './output'
 
 import type { Options } from '../../types'
-// import type { Ace } from 'ace-builds'
+import type { Ace } from 'ace-builds'
+
+console.log(import.meta.env)
+const port = import.meta.env.VITE_PORT
+  ? parseInt(import.meta.env.VITE_PORT, 10)
+  : 3000
 
 export function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  // const inputRef = useRef<Ace.Editor>()
-  // const outputRef = useRef<Ace.Editor>()
+  const inputRef = useRef<Ace.Editor>()
+  const outputRef = useRef<Ace.Editor>()
   const [doc, setDoc] = useState<string>(defaultDoc)
   const [options, setOptions] = useState<Options>(defaultOptions)
   const debounceTimer = useRef<number>()
@@ -34,7 +39,7 @@ export function App() {
 
   const convert = async () => {
     const prettierConfig = JSON.parse(options.inheritPrettier)
-    await fetch(`http://localhost:3000/z`, {
+    await fetch(`http://localhost:${port}/z`, {
       method: 'POST',
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -49,8 +54,8 @@ export function App() {
     })
       .then((res) => res.json())
       .then((json) => {
-        // outputRef.current?.setValue(json)
-        // outputRef.current?.clearSelection()
+        outputRef.current?.setValue(json)
+        outputRef.current?.clearSelection()
       })
   }
 
@@ -75,15 +80,15 @@ export function App() {
         <Header onOpen={onOpen} />
       </GridItem>
       <GridItem>
-        {/* <Input
+        <Input
           AceEditor={AceEditor}
           options={options}
           inputRef={inputRef}
           setDoc={setDoc}
-        /> */}
+        />
       </GridItem>
       <GridItem>
-        {/* <Output AceEditor={AceEditor} options={options} outputRef={outputRef} /> */}
+        <Output AceEditor={AceEditor} options={options} outputRef={outputRef} />
       </GridItem>
       <Menu
         isOpen={isOpen}

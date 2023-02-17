@@ -1,7 +1,6 @@
+import { oasComponentsToZod } from 'oas30-to-zod'
 import stripAnsi from 'strip-ansi'
 import YAML from 'yaml'
-
-import { oasComponentsToZod } from '../../../dist/index.js'
 
 import type { FastifyPluginCallback } from 'fastify'
 

@@ -4,16 +4,15 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ESNext",
     "module": "ESNext",
-    "useDefineForClassFields": true,
-    // "allowJs": false,
-    "esModuleInterop": false,
+    "moduleResolution": "node",
+
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "noEmitOnError": true,
+
+    "outDir": "dist/server"
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/server"]
+  // "references": [{ "path": "./tsconfig.node.json" }]
 }

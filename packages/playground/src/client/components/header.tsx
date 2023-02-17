@@ -1,4 +1,3 @@
-import { SettingsIcon } from '@chakra-ui/icons'
 import {
   IconButton,
   Box,
@@ -9,11 +8,11 @@ import {
   Link,
 } from '@chakra-ui/react'
 import { useRef } from 'preact/hooks'
-import { SiGithub, SiNpm } from 'react-icons/si'
+import { RiSettings5Fill, RiGithubFill, RiNpmjsFill } from 'react-icons/ri'
 
-import packageJson from '../../../package.json'
+import packageJson from '../../../../oas30-to-zod/package.json'
 
-import type { HeaderProps } from '../types'
+import type { HeaderProps } from '../../types'
 
 import 'ace-builds/src-noconflict/mode-yaml'
 import 'ace-builds/src-noconflict/mode-json'
@@ -38,7 +37,7 @@ export function Header(props: HeaderProps) {
           >
             <IconButton
               aria-label="GitHub"
-              icon={<SiGithub />}
+              icon={<RiGithubFill />}
               variant="outline"
               colorScheme="blue"
             />
@@ -51,7 +50,7 @@ export function Header(props: HeaderProps) {
           >
             <IconButton
               aria-label="NPM"
-              icon={<SiNpm />}
+              icon={<RiNpmjsFill />}
               variant="outline"
               colorScheme="blue"
             />
@@ -61,7 +60,7 @@ export function Header(props: HeaderProps) {
           <IconButton
             ref={btnRef}
             aria-label="Options"
-            icon={<SettingsIcon />}
+            icon={<RiSettings5Fill />}
             colorScheme="blue"
             onClick={onOpen}
           />

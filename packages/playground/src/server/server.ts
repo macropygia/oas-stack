@@ -12,10 +12,11 @@ import type { FastifyReply, FastifyInstance } from 'fastify'
 
 dotenv.config()
 
-const isDev = process.argv.includes('--dev') ? true : false
+const isDev = process.env['NODE_ENV'] !== 'production' ? true : false
+const port = process.env['PORT'] ? parseInt(process.env['PORT'], 10) : 3000
 
 export async function main() {
-  const fastify = Fastify({ logger: true })
+  const fastify = Fastify({ logger: isDev })
 
   // Register internal plugin for oas30-to-zod
   fastify.register(converter)
@@ -39,5 +40,5 @@ export async function main() {
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {
   const server = await main()
-  await server.listen({ port: 3000 })
+  await server.listen({ port })
 }

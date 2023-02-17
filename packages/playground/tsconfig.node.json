@@ -1,14 +1,18 @@
 {
   "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ESNext",
+    // "composite": true,
     "module": "ESNext",
     "moduleResolution": "node",
+
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmitOnError": true,
-    "checkJs": false,
-    "outDir": "dist/server"
+
+    "declaration": false,
+    "outDir": "."
   },
-  "include": ["src/server"]
+  "include": ["vite.config.ts"],
+  "exclude": []
 }

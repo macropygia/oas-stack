@@ -6,9 +6,8 @@ import { defineConfig } from 'vite'
 
 dotenv.config()
 
-const isDev = process.argv.includes('--dev') ? true : false
+const isDev = process.env['NODE_ENV'] !== 'production' ? true : false
 const rootFragment = isDev ? 'src' : 'dist'
-// const rootFragment = 'src'
 
 // https://vitejs.dev/config/
 export default defineConfig({
