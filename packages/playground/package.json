@@ -25,7 +25,7 @@
     "dotenv": "^16.0.3",
     "fastify": "^4.13.0",
     "framer-motion": "^9.0.4",
-    "oas30-to-zod": "workspace:^0.0.8",
+    "oas30-to-zod": "workspace:*",
     "preact": "^10.12.1",
     "react": "npm:@preact/compat@^17.1.2",
     "react-ace": "^10.1.0",
