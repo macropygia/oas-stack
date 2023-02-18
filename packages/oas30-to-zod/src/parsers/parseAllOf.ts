@@ -1,7 +1,6 @@
-import { red, yellow } from 'ansis/colors'
-
 import { parseSchema } from '@/parseSchema.js'
 import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
+import { red, yellow } from '@/utils/ansi'
 import { half } from '@/utils/half.js'
 
 import type { AllOfParser, MixedObject, ParseContext } from '@/types/index.js'
@@ -12,7 +11,7 @@ export const parseAllOf: AllOfParser = (schema, ctx) => {
 
   // 'allOf' is empty or not an array
   if (!Array.isArray(schema.allOf) || schema.allOf.length === 0) {
-    console.error(ctx.name, red`'allOf' is empty or not an array.`)
+    console.error(ctx.name, red(`'allOf' is empty or not an array.`))
     return 'z.undefined()'
   }
 
@@ -34,7 +33,7 @@ export const parseAllOf: AllOfParser = (schema, ctx) => {
   // 'allOf' has multiple elements including a non-object.
   console.log(
     ctx.name,
-    yellow`'allOf' has non-object schema. It may cause malfunction.`
+    yellow(`'allOf' has non-object schema. It may cause malfunction.`)
   )
   const [left, right] = half(schema.allOf as MixedObject[])
   return `z.intersection(${parseAllOf({ allOf: left }, ctx)},${parseAllOf(
@@ -62,7 +61,7 @@ const doesAllOfContainOnlyObject = (
       if (!compName) {
         console.error(
           ctx.name,
-          red`'$ref' references an unknown object. (maybe external)`
+          red(`'$ref' references an unknown object. (maybe external)`)
         )
         throw new Error(`'$ref' references an unknown object.`)
       }

@@ -1,6 +1,5 @@
-import { red } from 'ansis/colors'
-
 import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
+import { red } from '@/utils/ansi'
 
 import type { ReferenceParser } from '@/types/index.js'
 
@@ -16,7 +15,7 @@ export const parseReference: ReferenceParser = (schema, ctx) => {
 
   console.error(
     ctx.name,
-    red`'$ref' references an unknown object. (maybe external)`
+    red(`'$ref' references an unknown object. (maybe external)`)
   )
   throw new Error(`'$ref' references an unknown object.`)
 

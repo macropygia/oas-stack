@@ -1,6 +1,5 @@
-import { red } from 'ansis/colors'
-
 import { parseSchema } from '@/parseSchema.js'
+import { red } from '@/utils/ansi'
 
 import type {
   NonArraySchemaObject,
@@ -36,7 +35,7 @@ export const parseObject: ObjectParser = (schema, ctx) => {
 
   console.error(
     ctx.name,
-    red`'object' has neither 'properties' nor 'additionalProperties'.`
+    red(`'object' has neither 'properties' nor 'additionalProperties'.`)
   )
   return 'z.undefined()'
 }

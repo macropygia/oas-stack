@@ -1,4 +1,4 @@
-import { yellow } from 'ansis/colors'
+import { yellow } from '@/utils/ansi'
 
 import type { NumberParser } from '@/types/index.js'
 
@@ -18,9 +18,9 @@ export const parseNumber: NumberParser = (schema, ctx) => {
 
   if (typeof schema.multipleOf === 'number' && schema.multipleOf !== 1) {
     if (schema.multipleOf < 0)
-      console.log(ctx.name, yellow`'multipleOf' is negative.`)
+      console.log(ctx.name, yellow(`'multipleOf' is negative.`))
     if (schema.multipleOf % 1 !== 0)
-      console.log(ctx.name, yellow`'multipleOf' is float.`)
+      console.log(ctx.name, yellow(`'multipleOf' is float.`))
     fragments.push(`.multipleOf(${schema.multipleOf})`)
   }
 
@@ -39,7 +39,7 @@ export const parseNumber: NumberParser = (schema, ctx) => {
     )
 
     if (typeof schema.minimum === 'number' && schema.minimum > schema.maximum)
-      console.log(ctx.name, yellow`'minimum' greater than 'maxiumum'`)
+      console.log(ctx.name, yellow(`'minimum' greater than 'maxiumum'`))
   }
 
   return fragments.join('')

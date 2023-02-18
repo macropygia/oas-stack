@@ -1,7 +1,7 @@
 import SwaggerParser from '@apidevtools/swagger-parser'
-import { red } from 'ansis/colors'
 import fse from 'fs-extra'
 
+import { red } from '@/utils/ansi'
 import { autocompleteObject } from '@/utils/autocompleteObject'
 import { isV3, isValidDoc } from '@/utils/validateDoc'
 
@@ -20,7 +20,7 @@ export const initDoc = async (
 ) => {
   if (options.output)
     await fse.ensureFile(options.output).catch((err) => {
-      console.error(red`Unable to create output file.`)
+      console.error(red(`Unable to create output file.`))
       throw new Error(err)
     })
 
@@ -32,7 +32,7 @@ export const initDoc = async (
 
   if (!isV3(doc)) {
     console.error(
-      red`Document version mismatch. Only version 3.0 is supported.`
+      red(`Document version mismatch. Only version 3.0 is supported.`)
     )
     throw new Error('Only version 3.0 is supported.')
   }

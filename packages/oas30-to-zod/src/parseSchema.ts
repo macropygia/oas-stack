@@ -1,8 +1,7 @@
-import { magenta } from 'ansis/colors'
-
 import { addDefault } from '@/parsers/utils/addDefault.js'
 import { addDesc } from '@/parsers/utils/addDesc.js'
 import { parseByType } from '@/parsers/utils/parseByType.js'
+import { magenta } from '@/utils/ansi'
 
 import type { MixedObject, ParseContext, ParseOptions } from '@/types/index.js'
 
@@ -37,7 +36,7 @@ const parseSchema = (
   const { withoutDefaults, withDesc } = ctx.options
 
   if (typeof schema !== 'object') {
-    console.error(magenta`Input is not an object. Returns 'z.unknown()'.`)
+    console.error(magenta(`Input is not an object. Returns 'z.unknown()'.`))
     return 'z.unknown()'
   }
 

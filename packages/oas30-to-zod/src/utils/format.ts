@@ -1,6 +1,7 @@
-import { green, yellow } from 'ansis/colors'
 import prettier from 'prettier'
 import babelParser from 'prettier/parser-babel.js'
+
+import { green, yellow } from '@/utils/ansi'
 
 /**
  * Format generated code using Prettier.
@@ -35,11 +36,11 @@ export const getPrettierOptions = (): prettier.Options | null => {
   const options = prettier.resolveConfig.sync(process.cwd())
 
   if (!configFile || !options) {
-    console.log(yellow`Unable to find Prettier config in a project.`)
+    console.log(yellow(`Unable to find Prettier config in a project.`))
     return null
   }
 
-  console.log(green`Resolve Prettier config succeeded:`, configFile)
+  console.log(green(`Resolve Prettier config succeeded:`), configFile)
   console.group()
   console.log(options)
   console.groupEnd()

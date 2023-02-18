@@ -62,7 +62,7 @@ importers:
       '@types/ejs': ^3.1.2
       '@types/fs-extra': ^11.0.1
       '@types/prettier': ^2.7.2
-      ansis: ^1.5.5
+      ansi-styles: ^6.2.1
       cac: ^6.7.14
       ejs: ^3.1.8
       fs-extra: ^11.1.0
@@ -70,7 +70,7 @@ importers:
       zod: ^3.20.6
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
-      ansis: 1.5.5
+      ansi-styles: 6.2.1
       cac: 6.7.14
       ejs: 3.1.8
       fs-extra: 11.1.0
@@ -3097,11 +3097,6 @@ packages:
   /ansi-styles/6.2.1:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
-
-  /ansis/1.5.5:
-    resolution: {integrity: sha512-DNctovTacxs/NfZpGo6bIGWgLd2oZsDO7RJbiYX6Ttj40LPZM1XKv9WtesH13ieOEm1GajjD+Vik2n9YnSTPdA==}
-    engines: {node: '>=12.13'}
-    dev: false
 
   /any-promise/1.3.0:
     resolution: {integrity: sha512-7UvmKalWRt1wgjL1RrGxoSJW/0QZFIegpeGvZG9kjp8vrRu55XTHbwnqq2GpXm9uLbcuhxm3IqX9OB4MZR1b2A==}

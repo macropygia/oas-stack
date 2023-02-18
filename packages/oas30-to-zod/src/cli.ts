@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import path from 'node:path'
 
-import { cyan, green } from 'ansis/colors'
 import cac from 'cac' // eslint-disable-line import/no-named-as-default
 
 import { oasComponentsToZod } from '@/oasComponentsToZod.js'
+import { cyan, green } from '@/utils/ansi'
 
 import type { CliOptions } from '@/types/index.js'
 
@@ -29,7 +29,7 @@ cli
   .option('--disable-autocomplete', "Disable autocomplete `type: 'object'`")
   .option('-t, --template <path>', 'Template path for EJS')
   .action(async (input: string, options: CliOptions) => {
-    console.log('oas30-to-zod', green`Start processing...`)
+    console.log('oas30-to-zod', green(`Start processing...`))
 
     const output: string =
       options.output ||
@@ -41,8 +41,8 @@ cli
 
     await oasComponentsToZod(input, { ...options, output, disableRules })
 
-    console.log('oas30-to-zod', cyan`Output path:`, output)
-    console.log('oas30-to-zod', green`Done`)
+    console.log('oas30-to-zod', cyan(`Output path:`), output)
+    console.log('oas30-to-zod', green(`Done`))
   })
 
 cli.help()
