@@ -1,0 +1,12 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "noPropertyAccessFromIndexSignature": true,
+    "noEmit": false,
+    "noEmitOnError": true,
+
+    "baseUrl": ".",
+    "outDir": "api"
+  },
+  "include": ["server/serverless.ts"]
+}

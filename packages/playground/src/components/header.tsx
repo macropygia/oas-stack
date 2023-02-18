@@ -1,3 +1,4 @@
+/* eslint-disable n/no-unpublished-import */
 import {
   IconButton,
   Box,
@@ -10,14 +11,9 @@ import {
 import { useRef } from 'preact/hooks'
 import { RiSettings5Fill, RiGithubFill, RiNpmjsFill } from 'react-icons/ri'
 
-import packageJson from '../../../../oas30-to-zod/package.json'
+import packageJson from '../../../oas30-to-zod/package.json'
 
-import type { HeaderProps } from '../../types'
-
-import 'ace-builds/src-noconflict/mode-yaml'
-import 'ace-builds/src-noconflict/mode-json'
-import 'ace-builds/src-noconflict/mode-javascript'
-import 'ace-builds/src-noconflict/theme-monokai'
+import type { HeaderProps } from '../types'
 
 export function Header(props: HeaderProps) {
   const { onOpen } = props

@@ -1,4 +1,5 @@
-import type { OutputProps } from '../../types'
+/* eslint-disable n/no-unpublished-import */
+import type { OutputProps } from '../types'
 import type { Ace } from 'ace-builds'
 
 export function Output(props: OutputProps) {

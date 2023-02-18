@@ -1,15 +1,7 @@
 {
-  "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "noPropertyAccessFromIndexSignature": true,
 
     "baseUrl": ".",
     "paths": {
@@ -18,7 +10,38 @@
     },
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
-  },
-  "include": ["src", "api"]
-  // "references": [{ "path": "./tsconfig.node.json" }]
+  }
 }
+
+/*
+ref. https://github.com/withastro/astro/tree/main/packages/astro/tsconfigs
+{
+  "compilerOptions": {
+    // Basic
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true, // node18-strictest-esm
+    "esModuleInterop": true, // node18-strictest-esm
+    "skipLibCheck": true, // node18-strictest-esm
+
+    // Strict
+    "strict": true, // node18-strictest-esm
+    "importsNotUsedAsValues": "error", // node18-strictest-esm
+
+    // Strictest
+    "noFallthroughCasesInSwitch": true, // node18-strictest-esm
+    "noImplicitOverride": true, // node18-strictest-esm
+    "noImplicitReturns": true, // node18-strictest-esm
+    "noUnusedLocals": true, // node18-strictest-esm
+    "noUnusedParameters": true, // node18-strictest-esm
+    "noUncheckedIndexedAccess": true, // node18-strictest-esm
+    "exactOptionalPropertyTypes": true, // node18-strictest-esm
+    "allowUnreachableCode": false, // node18-strictest-esm
+    "allowUnusedLabels": false // node18-strictest-esm
+  }
+}
+*/

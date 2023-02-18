@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/z",
+      "destination": "/api/serverless.js"
+    }
+  ]
+}

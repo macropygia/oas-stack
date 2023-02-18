@@ -1,3 +1,4 @@
+/* eslint-disable n/no-unpublished-import */
 import {
   Button,
   Code,
@@ -28,9 +29,9 @@ import {
 } from '@chakra-ui/react'
 import { useRef } from 'preact/hooks'
 
-import { defaultOptions } from '../../const'
+import { defaultOptions } from '../const'
 
-import type { MenuProps } from '../../types'
+import type { MenuProps } from '../types'
 
 export function Menu(props: MenuProps) {
   const { isOpen, onClose, options, setOptions, convert } = props
@@ -41,6 +42,8 @@ export function Menu(props: MenuProps) {
       isOpen={isOpen}
       placement="right"
       onClose={onClose}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       finalFocusRef={btnRef}
     >
       <DrawerOverlay />
@@ -55,7 +58,11 @@ export function Menu(props: MenuProps) {
               id="dereference"
               isChecked={options.dereference}
               onChange={(e) => {
-                setOptions({ ...options, ...{ dereference: e.target.checked } })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ dereference: e.target.checked },
+                  })
               }}
             />
 
@@ -80,10 +87,11 @@ export function Menu(props: MenuProps) {
               id="individually"
               isChecked={options.individually}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ individually: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ individually: e.target.checked },
+                  })
               }}
             />
 
@@ -92,10 +100,11 @@ export function Menu(props: MenuProps) {
               id="eslintDisable"
               isChecked={options.eslintDisable}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ eslintDisable: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ eslintDisable: e.target.checked },
+                  })
               }}
             />
 
@@ -124,10 +133,11 @@ export function Menu(props: MenuProps) {
               id="withoutImport"
               isChecked={options.withoutImport}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ withoutImport: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ withoutImport: e.target.checked },
+                  })
               }}
             />
 
@@ -138,10 +148,11 @@ export function Menu(props: MenuProps) {
               id="withoutExport"
               isChecked={options.withoutExport}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ withoutExport: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ withoutExport: e.target.checked },
+                  })
               }}
             />
 
@@ -150,10 +161,11 @@ export function Menu(props: MenuProps) {
               id="disableFormat"
               isChecked={options.disableFormat}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ disableFormat: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ disableFormat: e.target.checked },
+                  })
               }}
             />
 
@@ -164,10 +176,11 @@ export function Menu(props: MenuProps) {
               id="withoutDefaults"
               isChecked={options.withoutDefaults}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ withoutDefaults: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ withoutDefaults: e.target.checked },
+                  })
               }}
             />
 
@@ -178,7 +191,8 @@ export function Menu(props: MenuProps) {
               id="withDesc"
               isChecked={options.withDesc}
               onChange={(e) => {
-                setOptions({ ...options, ...{ withDesc: e.target.checked } })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({ ...options, ...{ withDesc: e.target.checked } })
               }}
             />
 
@@ -189,7 +203,11 @@ export function Menu(props: MenuProps) {
               id="withAnchors"
               isChecked={options.withAnchors}
               onChange={(e) => {
-                setOptions({ ...options, ...{ withAnchors: e.target.checked } })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ withAnchors: e.target.checked },
+                  })
               }}
             />
 
@@ -200,10 +218,11 @@ export function Menu(props: MenuProps) {
               id="disableAutocomplete"
               isChecked={options.disableAutocomplete}
               onChange={(e) => {
-                setOptions({
-                  ...options,
-                  ...{ disableAutocomplete: e.target.checked },
-                })
+                if (e.target !== null && e.target instanceof HTMLInputElement)
+                  setOptions({
+                    ...options,
+                    ...{ disableAutocomplete: e.target.checked },
+                  })
               }}
             />
 
