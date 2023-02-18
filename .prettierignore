@@ -6,3 +6,4 @@ packages/*/__tests__/src
 packages/*/__tests__/dist
 *.md
 *.ejs
+packages/playground/api
