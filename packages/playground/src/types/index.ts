@@ -1,3 +1,4 @@
+/* eslint-disable n/no-unpublished-import */
 import type { Ace } from 'ace-builds'
 import type { MutableRef, StateUpdater } from 'preact/hooks'
 import type ReactAce from 'react-ace'

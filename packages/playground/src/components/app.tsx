@@ -1,3 +1,4 @@
+/* eslint-disable n/no-unpublished-import */
 import { Grid, GridItem, useDisclosure } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import AceEditor from 'react-ace'
@@ -6,19 +7,17 @@ import { Header } from './header'
 import { Input } from './input'
 import { Menu } from './menu'
 import { Output } from './output'
-import { defaultDoc, defaultOptions } from '../../const'
+import { defaultDoc, defaultOptions } from '../const'
 
-import type { Options } from '../../types'
+import type { Options } from '../types'
 import type { Ace } from 'ace-builds'
 
-const protocol = import.meta.env.VITE_VERCEL_URL ? 'https' : 'http'
-const domain = import.meta.env.VITE_VERCEL_URL
-  ? import.meta.env.VITE_VERCEL_URL
-  : 'localhost'
-const port = import.meta.env.VITE_API_PORT
-  ? parseInt(import.meta.env.VITE_API_PORT, 10)
-  : 3000
-const portFragment = port === 80 ? '' : `:${port}`
+const port = import.meta.env['PUBLIC_API_PORT']
+  ? parseInt(import.meta.env['PUBLIC_API_PORT'], 10)
+  : 2999
+const url = import.meta.env['PUBLIC_VERCEL_ENV']
+  ? '/api/z'
+  : `http://localhost:${port}/api/z`
 
 export function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -43,7 +42,7 @@ export function App() {
 
   const convert = async () => {
     const prettierConfig = JSON.parse(options.inheritPrettier)
-    await fetch(`${protocol}://${domain}${portFragment}/api/z`, {
+    await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

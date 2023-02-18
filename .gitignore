@@ -1,4 +1,5 @@
-dist
+# Vercel
+.vercel
 
 # Codecov bin
 codecov

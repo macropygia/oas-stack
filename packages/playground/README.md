@@ -1,8 +1,14 @@
-# oas-stack playground
+# oas30-to-zod playground
 
 ```bash
-$ pnpm install
-$ pnpm play
+cd /path/to/oas30-to-zod
+pnpm install
+pnpm build
 
-# http://localhost:3000/
+cd ../playground
+pnpm play
 ```
+
+- Link to `oas30-to-zod` in workspace.
+- Starts at `http://localhost:3000` by default.
+- Settings are saved to local storage.
