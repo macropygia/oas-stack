@@ -8,6 +8,9 @@
 
 OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)スキーマを生成する。
 
+[![image](https://user-images.githubusercontent.com/3162324/219865668-83e0d221-e9db-43ac-acbc-ce37197382e3.png)](https://oas-stack.vercel.app/)
+
+- [Playground](https://oas-stack.vercel.app/) 使用可能
 - OpenAPI 3.1との互換性なし
 - 不安定版につき予告なく破壊的変更が行われる可能性あり
     - 変更点は [CHANGELOG](./CHANGELOG.md) を参照

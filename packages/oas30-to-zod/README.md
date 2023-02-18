@@ -8,6 +8,9 @@
 
 Generate [Zod](https://zod.dev/) schemas from OpenAPI Specification 3.0 components object.
 
+[![image](https://user-images.githubusercontent.com/3162324/219865668-83e0d221-e9db-43ac-acbc-ce37197382e3.png)](https://oas-stack.vercel.app/)
+
+- [Playground](https://oas-stack.vercel.app/) is available.
 - Incompatible with OpenAPI Specification 3.1.
 - This package is currently unstable.
     - Breaking changes may occur without any notice.
