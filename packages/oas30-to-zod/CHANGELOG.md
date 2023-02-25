@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.10
+
+### Patch Changes
+
+- fcba52b: Update docs
+
 ## 0.0.9
 
 ### Patch Changes
