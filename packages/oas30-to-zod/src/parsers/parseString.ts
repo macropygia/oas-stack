@@ -2,7 +2,7 @@ import { escapeControlCharacters } from '@/utils/escapeControlCharacters.js'
 
 import type { ParseContext, SchemaObject, StringParser } from '@/types/index.js'
 
-type KeywordTyps = 'minmax' | 'regex' | 'format'
+type KeywordTypes = 'minmax' | 'regex' | 'format'
 
 export const parseString: StringParser = (schema, ctx) => {
   if (typeof ctx.parsers?.stringParser === 'function')
@@ -17,7 +17,7 @@ export const parseString: StringParser = (schema, ctx) => {
   preset
     .split('-')
     .forEach((keyword) =>
-      keywordParser[keyword as KeywordTyps](schema, ctx, fragments)
+      keywordParser[keyword as KeywordTypes](schema, ctx, fragments)
     )
 
   return fragments.join('')

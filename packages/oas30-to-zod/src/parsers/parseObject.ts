@@ -44,7 +44,7 @@ export const parseObject: ObjectParser = (schema, ctx) => {
  * Parse object schema with properties
  * @param schema - Object schema with properties
  * @param ctx - Context
- * @returns Zod schema
+ * @returns Zod schema (string)
  */
 const parseWithProps = (schema: ObjectSchemaWithProps, ctx: ParseContext) => {
   const isPartial = !hasRequiredChild(schema)
@@ -88,7 +88,7 @@ const hasRequiredChild = (schema: ObjectSchemaWithProps): boolean => {
  * @param schema - Object schema with properties
  * @param ctx - Context
  * @param shouldOmitOptional - Should omit `.optional()`
- * @returns Zod schema
+ * @returns Zod schema (string)
  */
 const parseProperties = (
   schema: ObjectSchemaWithProps,
@@ -123,7 +123,7 @@ const parseProperties = (
  * Parse object schema that only has `additionalProperties`
  * @param schema - Object schema without properties
  * @param ctx - Context
- * @returns Zod schema
+ * @returns Zod schema (string)
  */
 const parseWithoutProps = (
   schema: ObjectSchemaWithoutProps,

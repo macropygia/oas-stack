@@ -6,9 +6,9 @@ import { green, yellow } from '@/utils/ansi'
 /**
  * Format generated code using Prettier.
  * @param source - Raw code
- * @returns Formatted code
+ * @returns Formatted Zod schema (string)
  */
-export const format = (
+export const formatParsedString = (
   source: string,
   inheritPrettier?: boolean | prettier.Options
 ): string => {

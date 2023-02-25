@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest'
 
-import { half } from '@/utils/half.js'
+import { divideArray } from '@/utils/divideArray.js'
 
-describe('half', () => {
+describe('divideArray', () => {
   test('Default', () => {
-    expect(half([1, 2, 3, 4, 5])).toMatchInlineSnapshot(`
+    expect(divideArray([1, 2, 3, 4, 5])).toMatchInlineSnapshot(`
       [
           [
               1,
@@ -20,7 +20,7 @@ describe('half', () => {
   })
 
   test('Empty', () => {
-    expect(half([])).toMatchInlineSnapshot(`
+    expect(divideArray([])).toMatchInlineSnapshot(`
       [
           [],
           [],

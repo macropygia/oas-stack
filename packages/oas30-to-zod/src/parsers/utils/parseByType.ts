@@ -30,7 +30,7 @@ import type { MixedObject, ParseContext } from '@/types/index.js'
  * Parse OAS schema to Zod schema
  * @param schema - OAS Schema
  * @param ctx - Context
- * @returns Zod schemas (string)
+ * @returns Zod schema (string)
  */
 export const parseByType = (schema: MixedObject, ctx: ParseContext): string => {
   // Reference

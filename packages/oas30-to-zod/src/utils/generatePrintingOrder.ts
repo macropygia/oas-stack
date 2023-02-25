@@ -9,7 +9,7 @@ import type { ComponentDeps, ComponentName } from '@/types/index.js'
 export const generatePrintingOrder = (
   remains: ComponentDeps,
   printingOrder: ComponentName[] = []
-) => {
+): ComponentName[] => {
   Object.entries(remains).forEach(([comp, deps]) => {
     const missingDeps = deps.filter((dep) => !printingOrder.includes(dep))
     if (missingDeps.length === 0) {

@@ -1,8 +1,40 @@
-import type { Document, ComponentsObject } from '@/types/index.js'
+import SwaggerParser from '@apidevtools/swagger-parser'
+
+import { red } from '@/utils/ansi'
+import { autocompleteObject } from '@/utils/autocompleteObject'
+
+import type { Options, Document } from '@/types/index.js'
 import type { OpenAPI, OpenAPIV3 } from 'openapi-types'
 
 /**
- * Is the document version 3.0?
+ * Validate document
+ * @param input - Document object or file path
+ * @param options - Options
+ * @returns Document object
+ */
+export const validateDoc = async (
+  input: OpenAPI.Document | string,
+  options: Options
+) => {
+  const doc =
+    typeof input === 'string' ? await SwaggerParser.bundle(input) : input
+
+  if (!isV3(doc)) {
+    console.error(
+      red(`Document version mismatch. Only version 3.0 is supported.`)
+    )
+    throw new Error('Only version 3.0 is supported.')
+  }
+
+  if (!hasComponents(doc)) throw new Error(`Document has no 'components'.`)
+
+  if (!options.disableAutocomplete) autocompleteObject(doc)
+
+  return doc
+}
+
+/**
+ * Check version
  * @param doc - OpenAPI Document (any versions)
  * @returns boolean
  */
@@ -10,28 +42,9 @@ export const isV3 = (doc: OpenAPI.Document): doc is OpenAPIV3.Document =>
   'openapi' in doc && doc.openapi.startsWith('3.0')
 
 /**
- * Does the document have components?
+ * Check components
  * @param doc - OpenAPI 3.0 Document
  * @returns boolean
  */
-export const hasComponents = (
-  doc: OpenAPIV3.Document
-): doc is OpenAPIV3.Document & { components: OpenAPIV3.ComponentsObject } =>
-  'components' in doc
-
-/**
- * Does the components object have schemas?
- * @param doc - Components Object in OpenAPI 3.0 Document
- * @returns boolean
- */
-export const hasSchemas = (
-  components: OpenAPIV3.ComponentsObject
-): components is ComponentsObject => 'schemas' in components
-
-/**
- * Document suitable for processing?
- * @param doc - Components Object in OpenAPI 3.0 Document
- * @returns boolean
- */
-export const isValidDoc = (doc: OpenAPIV3.Document): doc is Document =>
-  hasComponents(doc) && hasSchemas(doc.components)
+export const hasComponents = (doc: OpenAPIV3.Document): doc is Document =>
+  'components' in doc && 'schemas' in doc.components

@@ -15,7 +15,7 @@ const defaultParseOptions: ParseOptions = {
  * Parse schema object
  * @param schema - Schema object
  * @param partialContext - Context object
- * @returns Parsed string
+ * @returns Zod schema (string)
  */
 const parseSchema = (
   schema: MixedObject,

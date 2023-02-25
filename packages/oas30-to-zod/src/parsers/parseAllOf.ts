@@ -1,7 +1,7 @@
 import { parseSchema } from '@/parseSchema.js'
 import { getComponentNameFromRef } from '@/parsers/utils/getComponentNameFromRef.js'
 import { red, yellow } from '@/utils/ansi'
-import { half } from '@/utils/half.js'
+import { divideArray } from '@/utils/divideArray.js'
 
 import type { AllOfParser, MixedObject, ParseContext } from '@/types/index.js'
 
@@ -35,7 +35,7 @@ export const parseAllOf: AllOfParser = (schema, ctx) => {
     ctx.name,
     yellow(`'allOf' has non-object schema. It may cause malfunction.`)
   )
-  const [left, right] = half(schema.allOf as MixedObject[])
+  const [left, right] = divideArray(schema.allOf as MixedObject[])
   return `z.intersection(${parseAllOf({ allOf: left }, ctx)},${parseAllOf(
     {
       allOf: right,
