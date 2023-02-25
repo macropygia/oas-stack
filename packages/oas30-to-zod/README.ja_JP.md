@@ -62,6 +62,7 @@ OpenAPI Specification 3.0のコンポーネントから[Zod](https://zod.dev/)�
 - `input`
     - YAML/JSONファイルのパス ( `string` )
     - またはパース済のオブジェクト ( `object` )
+    - [SwaggerParser.bundle](https://apitools.dev/swagger-parser/docs/swagger-parser.html#bundleapi-options-callback) を使用する
 - `options`
     - 下記参照
 
@@ -108,6 +109,7 @@ console.log(zodSchemasString);
 処理前に参照（ `$ref` ）を解決する。
 
 - 全ての `$ref` を解決する
+    - [SwaggerParser.dereference](https://apitools.dev/swagger-parser/docs/swagger-parser.html#dereferenceapi-options-callback) を使用する
 - コンポーネント間に循環参照が存在する場合は `true` 必須
 - 既定値: `false`
 

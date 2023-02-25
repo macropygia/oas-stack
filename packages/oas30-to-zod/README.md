@@ -63,6 +63,7 @@ See [Zod document](https://github.com/colinhacks/zod#strings) for details.
 - `input`
     - Path to YAML/JSON ( `string` )
     - Or parsed document ( `object` )
+    - Using [SwaggerParser.bundle](https://apitools.dev/swagger-parser/docs/swagger-parser.html#bundleapi-options-callback)
 - `options`
     - See following
 
@@ -109,6 +110,7 @@ Output for the file.
 Dereference the document before processing.
 
 - Resolve all `$ref` .
+    - Using [SwaggerParser.dereference](https://apitools.dev/swagger-parser/docs/swagger-parser.html#dereferenceapi-options-callback)
 - Must be `true` if circular references exist between components.
 - Default: `false`
 
