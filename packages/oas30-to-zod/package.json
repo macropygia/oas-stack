@@ -60,13 +60,13 @@
     "ansi-styles": "^6.2.1",
     "cac": "^6.7.14",
     "ejs": "^3.1.8",
-    "fs-extra": "^11.1.0",
-    "openapi-types": "^12.1.0"
+    "fs-extra": "^11.1.0"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.2",
     "@types/fs-extra": "^11.0.1",
     "@types/prettier": "^2.7.2",
+    "openapi-types": "^12.1.0",
     "zod": "^3.20.6"
   },
   "peerDependencies": {
