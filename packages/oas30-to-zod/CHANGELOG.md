@@ -1,5 +1,11 @@
 # oas30-to-zod
 
+## 0.0.11
+
+### Patch Changes
+
+- c4d8e03: Replace CLI color library
+
 ## 0.0.10
 
 ### Patch Changes
